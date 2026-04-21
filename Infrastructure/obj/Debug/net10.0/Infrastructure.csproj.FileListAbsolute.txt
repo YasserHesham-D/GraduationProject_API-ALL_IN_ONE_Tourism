@@ -1,0 +1,15 @@
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.csproj.AssemblyReference.cache
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.AssemblyInfoInputs.cache
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.AssemblyInfo.cs
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.csproj.CoreCompileInputs.cache
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\bin\Debug\net10.0\Infrastructure.deps.json
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\bin\Debug\net10.0\Infrastructure.dll
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\bin\Debug\net10.0\Infrastructure.pdb
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\bin\Debug\net10.0\Domain.dll
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\bin\Debug\net10.0\Domain.pdb
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastr.15EFFBFE.Up2Date
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.dll
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\refint\Infrastructure.dll
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\Infrastructure.pdb
+D:\WebDev\Backend\Api's\TourismG_API\Infrastructure\obj\Debug\net10.0\ref\Infrastructure.dll

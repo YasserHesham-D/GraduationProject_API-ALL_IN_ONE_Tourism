@@ -1,0 +1,246 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\application\\dtos\\signup\\signupresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|solutionrelative:application\\dtos\\signup\\signupresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\application\\services\\accountservices\\accountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|solutionrelative:application\\services\\accountservices\\accountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\application\\dtos\\signin\\signinresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|solutionrelative:application\\dtos\\signin\\signinresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\application\\services\\accountservices\\iaccountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|solutionrelative:application\\services\\accountservices\\iaccountservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\tourismg_api\\serviceextensions\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\serviceextensions\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\tourismg_api\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{50EDEE2D-82C5-483E-8CF2-68F873494065}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|solutionrelative:domain\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\domain\\interfaces\\irepository\\irepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\irepository\\irepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\domain\\interfaces\\imodelsrepo\\iaccountsrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D02638A-61A1-4436-ADAB-AB04F7CBC49E}|Domain\\Domain.csproj|solutionrelative:domain\\interfaces\\imodelsrepo\\iaccountsrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A785F5CA-E11C-4E76-A027-17F2C6A2994C}|Infrastructure\\Infrastructure.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A785F5CA-E11C-4E76-A027-17F2C6A2994C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{33EEC606-0CBE-4138-83F6-9EC01EFA74F7}|Application\\Application.csproj|solutionrelative:application\\application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SignUpResponse.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Dtos\\SignUp\\SignUpResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\SignUp\\SignUpResponse.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Dtos\\SignUp\\SignUpResponse.cs",
+              "RelativeToolTip": "Application\\Dtos\\SignUp\\SignUpResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T19:26:57.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SignInResponse.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Dtos\\SignIn\\SignInResponse.cs",
+              "RelativeDocumentMoniker": "Application\\Dtos\\SignIn\\SignInResponse.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Dtos\\SignIn\\SignInResponse.cs",
+              "RelativeToolTip": "Application\\Dtos\\SignIn\\SignInResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T19:25:39.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountServices.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Services\\AccountServices\\AccountServices.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\AccountServices\\AccountServices.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Services\\AccountServices\\AccountServices.cs",
+              "RelativeToolTip": "Application\\Services\\AccountServices\\AccountServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T19:00:59.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IAccountServices.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Services\\AccountServices\\IAccountServices.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\AccountServices\\IAccountServices.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Services\\AccountServices\\IAccountServices.cs",
+              "RelativeToolTip": "Application\\Services\\AccountServices\\IAccountServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T19:00:17.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServiceCollection.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\ServiceExtensions\\ServiceCollection.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\ServiceExtensions\\ServiceCollection.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\ServiceExtensions\\ServiceCollection.cs",
+              "RelativeToolTip": "TourismG_API\\ServiceExtensions\\ServiceCollection.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAmwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:52:02.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Program.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Program.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Program.cs",
+              "RelativeToolTip": "TourismG_API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:48:11.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\AccountsController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\AccountsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:47:57.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Application",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Application.csproj",
+              "RelativeDocumentMoniker": "Application\\Application.csproj",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Application\\Application.csproj",
+              "RelativeToolTip": "Application\\Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-21T18:45:52.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Infrastructure\\Repositories\\Repository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Repository.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Infrastructure\\Repositories\\Repository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Repository.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAowCwAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:42:40.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IAccountsRepo.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Interfaces\\IModelsRepo\\IAccountsRepo.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IModelsRepo\\IAccountsRepo.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Interfaces\\IModelsRepo\\IAccountsRepo.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IModelsRepo\\IAccountsRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:42:28.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IRepo.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Interfaces\\IRepository\\IRepo.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IRepository\\IRepo.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Interfaces\\IRepository\\IRepo.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IRepository\\IRepo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:39:09.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Domain\\Models\\User.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\Domain\\Models\\User.cs",
+              "RelativeToolTip": "Domain\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T18:24:43.917Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 323,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

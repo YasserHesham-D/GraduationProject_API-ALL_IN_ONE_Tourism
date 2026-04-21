@@ -1,0 +1,34 @@
+[
+  {
+    "ContainingType": "Presentation.Controllers.AccountsController",
+    "Method": "SignIn",
+    "RelativePath": "api/Accounts/SignIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.AccountsController",
+    "Method": "SignUp",
+    "RelativePath": "api/Accounts/SignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
