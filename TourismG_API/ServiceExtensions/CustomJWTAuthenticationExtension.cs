@@ -36,8 +36,8 @@ namespace Presentation.ServiceExtensions
                     ValidAudience = jWT.GetSection("Audience").Value,
 
                     ValidateLifetime = true,
-                   
-                    ClockSkew = TimeSpan.Zero, 
+
+                    ClockSkew = TimeSpan.Zero,
 
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jWT.GetSection("SigningKey").Value)),

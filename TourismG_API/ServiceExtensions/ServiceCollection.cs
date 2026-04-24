@@ -1,4 +1,5 @@
 ﻿
+using Application.Services.AccountServices;
 using Domain.Interfaces.IModelsRepo;
 using Domain.Interfaces.IRepository;
 using Domain.Interfaces.IUnitOfWork;
@@ -17,8 +18,10 @@ namespace Presentation.ServiceExtensions
    
 
             services.AddScoped<IAccountsRepo, AccountsRepo>();
-            //services.AddScoped<IAccountServices, AccountServices>();
+            services.AddScoped<IAccountServices, AccountServices>();
 
+
+            services.AddScoped<SeedDataService>();
 
             return services;
         }

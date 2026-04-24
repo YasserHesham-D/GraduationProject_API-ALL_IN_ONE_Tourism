@@ -10,3 +10,4 @@ D:\WebDev\Backend\Api's\TourismG_API\Domain\obj\Debug\net10.0\Domain.dll
 D:\WebDev\Backend\Api's\TourismG_API\Domain\obj\Debug\net10.0\refint\Domain.dll
 D:\WebDev\Backend\Api's\TourismG_API\Domain\obj\Debug\net10.0\Domain.pdb
 D:\WebDev\Backend\Api's\TourismG_API\Domain\obj\Debug\net10.0\ref\Domain.dll
+D:\WebDev\Backend\Api's\TourismG_API\Domain\obj\Debug\net10.0\Domain.sourcelink.json

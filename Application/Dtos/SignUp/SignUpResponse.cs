@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Application.Dtos.SignUp
 {
+
     public class SignUpResponse
     {
 
     }
+
 }

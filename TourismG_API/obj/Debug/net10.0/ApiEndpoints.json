@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "System.String",
+        "Type": "Application.Dtos.SignIn.SignInRequest",
         "IsRequired": true
       }
     ],
@@ -25,10 +25,20 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "System.String",
+        "Type": "Application.Dtos.SignUp.SignUpRequest",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.AccountsController",
+    "Method": "TestAuth",
+    "RelativePath": "api/Accounts/TestAuth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
