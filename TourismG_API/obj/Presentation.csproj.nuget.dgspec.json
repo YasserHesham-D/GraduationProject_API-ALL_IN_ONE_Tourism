@@ -30,6 +30,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
               "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Infrastructure\\Infrastructure.csproj": {
@@ -52,6 +53,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "System.IdentityModel.Tokens.Jwt": {
@@ -379,6 +381,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -397,6 +400,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
@@ -724,6 +728,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
               "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\Domain.csproj": {
@@ -746,6 +751,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Design": {
@@ -1085,6 +1091,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
               "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Application\\Application.csproj": {
@@ -1110,6 +1117,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
