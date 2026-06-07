@@ -1,0 +1,287 @@
+{
+  "info": {
+    "_postman_id": "7f5de2ff-8af4-4b66-9d4e-tourismg-api",
+    "name": "TourismG API",
+    "description": "Postman collection for the TourismG .NET API. Set `baseUrl` to your running API URL, then run Sign In or Sign Up to populate `token`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://localhost:5001" },
+    { "key": "token", "value": "" },
+    { "key": "placeId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "serviceId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "tripId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "dayId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "activityId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "bookingId", "value": "00000000-0000-0000-0000-000000000000" },
+    { "key": "resetToken", "value": "" },
+    { "key": "category", "value": "Historical" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{token}}", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Explorer User\",\n  \"email\": \"explorer@example.com\",\n  \"password\": \"User@123456\",\n  \"confirmPassword\": \"User@123456\",\n  \"address\": \"Cairo, Egypt\",\n  \"role\": \"Customer\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Accounts/SignUp",
+            "description": "Creates a customer or provider account. Role can be `Customer` or `Provider`."
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.Token) pm.collectionVariables.set('token', json.Token);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Sign In",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"provider@example.com\",\n  \"password\": \"Provider@123456\"\n}"
+            },
+            "url": "{{baseUrl}}/api/Accounts/SignIn",
+            "description": "Authenticates a user and returns a JWT token."
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.Token) pm.collectionVariables.set('token', json.Token);"
+              ]
+            }
+          }]
+        },
+        { "name": "Test Auth", "request": { "method": "GET", "url": "{{baseUrl}}/api/Accounts/TestAuth" } },
+        { "name": "Logout", "request": { "method": "POST", "url": "{{baseUrl}}/api/Accounts/Logout", "description": "Server-side sign-out call. Remove the JWT from the client after this." } },
+        { "name": "Get Username", "request": { "method": "GET", "url": "{{baseUrl}}/api/Accounts/GetUsername" } },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"explorer@example.com\"\n}" },
+            "url": "{{baseUrl}}/api/Accounts/ForgotPassword",
+            "description": "Generates a password reset token. Current API returns the token directly because email sending is not configured."
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.resetToken) pm.collectionVariables.set('resetToken', json.resetToken);"
+              ]
+            }
+          }]
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"explorer@example.com\",\n  \"resetToken\": \"{{resetToken}}\",\n  \"newPassword\": \"NewUser@123456\",\n  \"confirmPassword\": \"NewUser@123456\"\n}" },
+            "url": "{{baseUrl}}/api/Accounts/ResetPassword"
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"currentPassword\": \"User@123456\",\n  \"newPassword\": \"NewUser@123456\",\n  \"confirmPassword\": \"NewUser@123456\"\n}" },
+            "url": "{{baseUrl}}/api/Accounts/ChangePassword"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        { "name": "Get Me", "request": { "method": "GET", "url": "{{baseUrl}}/api/Profile/me" } },
+        {
+          "name": "Update Me",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"Explorer User\",\n  \"address\": \"Giza, Egypt\"\n}" },
+            "url": "{{baseUrl}}/api/Profile/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Places",
+      "item": [
+        { "name": "Get Places", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places?search=pyramids&category=All&recommended=true&page=1&pageSize=20" } },
+        { "name": "Get Place By Id", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places/{{placeId}}" } },
+        { "name": "Get Places By Category", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places/category/{{category}}?page=1&pageSize=20" } },
+        { "name": "Get Place Summaries", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places/summary" } },
+        { "name": "Get Nearby Places", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places/{{placeId}}/nearby?take=5" } },
+        { "name": "Get Categories", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Places/categories" } }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        { "name": "Search All", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Search?query=giza&take=10" } }
+      ]
+    },
+    {
+      "name": "Saved And Visited Places",
+      "item": [
+        { "name": "Get Saved Places", "request": { "method": "GET", "url": "{{baseUrl}}/api/user/places/saved" } },
+        { "name": "Save Place", "request": { "method": "POST", "url": "{{baseUrl}}/api/user/places/saved/{{placeId}}" } },
+        { "name": "Remove Saved Place", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/user/places/saved/{{placeId}}" } },
+        { "name": "Get Visited Places", "request": { "method": "GET", "url": "{{baseUrl}}/api/user/places/visited" } },
+        { "name": "Mark Place Visited", "request": { "method": "POST", "url": "{{baseUrl}}/api/user/places/visited/{{placeId}}" } }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        { "name": "Get Place Reviews", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Reviews/places/{{placeId}}" } },
+        {
+          "name": "Add Or Update Place Review",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Amazing place and very organized visit.\"\n}" },
+            "url": "{{baseUrl}}/api/Reviews/places/{{placeId}}"
+          }
+        },
+        { "name": "Get Trip Reviews", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Reviews/trips/{{tripId}}" } },
+        {
+          "name": "Add Or Update Trip Review",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Great itinerary and smooth activities.\"\n}" },
+            "url": "{{baseUrl}}/api/Reviews/trips/{{tripId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        { "name": "Get Services", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Services?category=Tour&search=pyramids&page=1&pageSize=20" } },
+        { "name": "Get Service By Id", "request": { "auth": { "type": "noauth" }, "method": "GET", "url": "{{baseUrl}}/api/Services/{{serviceId}}" } },
+        {
+          "name": "Book Service",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"bookingDate\": \"2026-06-20T10:00:00Z\",\n  \"guests\": 2\n}" },
+            "url": "{{baseUrl}}/api/Services/{{serviceId}}/book"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        { "name": "Get My Bookings", "request": { "method": "GET", "url": "{{baseUrl}}/api/Bookings/my" } },
+        { "name": "Cancel Booking", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/Bookings/{{bookingId}}" } }
+      ]
+    },
+    {
+      "name": "Trips",
+      "item": [
+        { "name": "Get Trips", "request": { "method": "GET", "url": "{{baseUrl}}/api/Trips" } },
+        { "name": "Get Trip By Id", "request": { "method": "GET", "url": "{{baseUrl}}/api/Trips/{{tripId}}" } },
+        {
+          "name": "Create Trip",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Ancient Wonders Tour\",\n  \"startDate\": \"2026-05-01\",\n  \"endDate\": \"2026-05-02\",\n  \"notes\": \"Plan for a two-day Cairo and Giza trip.\"\n}" },
+            "url": "{{baseUrl}}/api/Trips"
+          }
+        },
+        {
+          "name": "Update Trip",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Updated Ancient Wonders Tour\",\n  \"notes\": \"Updated notes.\"\n}" },
+            "url": "{{baseUrl}}/api/Trips/{{tripId}}"
+          }
+        },
+        { "name": "Delete Trip", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/Trips/{{tripId}}" } },
+        {
+          "name": "Add Trip Activity",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Pyramids of Giza\",\n  \"scheduledAt\": \"09:00:00\",\n  \"placeId\": \"{{placeId}}\",\n  \"serviceOfferingId\": null,\n  \"notes\": \"Morning visit.\"\n}" },
+            "url": "{{baseUrl}}/api/Trips/{{tripId}}/days/{{dayId}}/activities"
+          }
+        },
+        { "name": "Delete Trip Activity", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/Trips/{{tripId}}/activities/{{activityId}}" } }
+      ]
+    },
+    {
+      "name": "Provider",
+      "item": [
+        { "name": "Get Dashboard", "request": { "method": "GET", "url": "{{baseUrl}}/api/provider/dashboard" } },
+        { "name": "Get My Services", "request": { "method": "GET", "url": "{{baseUrl}}/api/provider/services" } },
+        { "name": "Get My Service By Id", "request": { "method": "GET", "url": "{{baseUrl}}/api/provider/services/{{serviceId}}" } },
+        {
+          "name": "Add Service",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placeId\": \"{{placeId}}\",\n  \"title\": \"Private Pyramids Tour\",\n  \"category\": \"Tour\",\n  \"description\": \"Guided private tour around Giza.\",\n  \"price\": 400,\n  \"currency\": \"EGP\",\n  \"duration\": \"4 hours\",\n  \"locationName\": \"Giza, Egypt\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368\",\n  \"availability\": \"Daily\",\n  \"rating\": 4.9,\n  \"isActive\": true\n}" },
+            "url": "{{baseUrl}}/api/provider/services"
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"placeId\": \"{{placeId}}\",\n  \"title\": \"Updated Private Pyramids Tour\",\n  \"category\": \"Tour\",\n  \"description\": \"Updated guided tour around Giza.\",\n  \"price\": 450,\n  \"currency\": \"EGP\",\n  \"duration\": \"4 hours\",\n  \"locationName\": \"Giza, Egypt\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368\",\n  \"availability\": \"Daily\",\n  \"rating\": 4.9,\n  \"isActive\": true\n}" },
+            "url": "{{baseUrl}}/api/provider/services/{{serviceId}}"
+          }
+        },
+        { "name": "Delete Service", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/provider/services/{{serviceId}}" } },
+        { "name": "Get Provider Bookings", "request": { "method": "GET", "url": "{{baseUrl}}/api/provider/bookings" } },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"confirmed\"\n}" },
+            "url": "{{baseUrl}}/api/provider/bookings/{{bookingId}}/status"
+          }
+        }
+      ]
+    }
+  ]
+}

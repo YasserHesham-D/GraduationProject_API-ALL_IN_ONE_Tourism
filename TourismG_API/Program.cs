@@ -1,8 +1,10 @@
-using Domain.Models;
+﻿using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 using Presentation.ServiceExtensions;
+//using Microsoft.OpenApi.Models;          
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +39,31 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "TourismG API",
+        Version = "v1",
+        Description = "API documentation for the TourismG mobile tourism app."
+    });
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter your JWT token only. Swagger will add the Bearer prefix."
+    });
+
+    // ✅ Swashbuckle 10.x + Microsoft.OpenApi 2.x correct pattern
+    options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = new List<string>()
+    });
+});
 
 builder.Services.CustomJwtAuth(builder.Configuration);
 
@@ -47,10 +73,14 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.MapOpenApi();
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "TourismG API v1");
+    options.RoutePrefix = "swagger";
+});
+
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.UseHttpsRedirection();
 

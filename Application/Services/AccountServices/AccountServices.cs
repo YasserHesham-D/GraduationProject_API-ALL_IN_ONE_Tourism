@@ -42,14 +42,14 @@ namespace Application.Services.AccountServices
             {
                 UserName = request.FullName,
                 Email = request.Email,
-                Address = request.Address,
-                PasswordHash = request.Password
+                Address = request.Address
             };
             
             var result = await userManager.CreateAsync(user,request.Password);
             if (result.Succeeded)
             {
-                var roleResult = await userManager.AddToRoleAsync(user, "Customer");
+                var role = request.Role.Equals("Provider", StringComparison.OrdinalIgnoreCase) ? "Provider" : "Customer";
+                var roleResult = await userManager.AddToRoleAsync(user, role);
                 
 
                 var Token = await CreateAccessToken(user);
@@ -70,9 +70,9 @@ namespace Application.Services.AccountServices
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id),
-                new(ClaimTypes.Name, user.UserName),
-                new(ClaimTypes.Email, user.Email),
-                new(ClaimTypes.Role, userRole),
+                new(ClaimTypes.Name, user.UserName ?? string.Empty),
+                new(ClaimTypes.Email, user.Email ?? string.Empty),
+                new(ClaimTypes.Role, userRole ?? "Customer"),
                 new(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 
             };

@@ -13,6 +13,7 @@ namespace Application.Dtos.SignUp
        public string Address { get; set; } = string.Empty;
 
        public string ConfirmPassword { get; set; }
+       public string Role { get; set; } = "Customer";
 
 
 

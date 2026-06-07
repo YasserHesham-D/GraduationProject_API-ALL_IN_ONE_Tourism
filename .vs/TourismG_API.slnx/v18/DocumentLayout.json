@@ -1,14 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\",
+  "WorkspaceRootPath": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\tourismg_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\controllers\\userplacescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\userplacescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\controllers\\placescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\placescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}|Infrastructure\\Infrastructure.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\infrastructure\\dbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\tourismg_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,28 +58,106 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\appsettings.json",
-              "RelativeDocumentMoniker": "TourismG_API\\appsettings.json",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\appsettings.json",
-              "RelativeToolTip": "TourismG_API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-24T19:50:18.035Z",
+              "DocumentIndex": 1,
+              "Title": "UserPlacesController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\UserPlacesController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\UserPlacesController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\UserPlacesController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\UserPlacesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T17:34:40.492Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Program.cs",
-              "RelativeDocumentMoniker": "TourismG_API\\Program.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\TourismG_API\\Program.cs",
-              "RelativeToolTip": "TourismG_API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABcAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\ProfileController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\ProfileController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-24T17:27:41.833Z",
+              "WhenOpened": "2026-06-07T17:26:58.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlacesController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\PlacesController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\PlacesController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\PlacesController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\PlacesController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAJ8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T17:22:23.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BookingsController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\BookingsController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\BookingsController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\BookingsController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\BookingsController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T17:21:20.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\AccountsController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\AccountsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-07T15:35:56.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "TourismG_API\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "TourismG_API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-06T17:41:19.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Program.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Program.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\TourismG_API\\Program.cs",
+              "RelativeToolTip": "TourismG_API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T17:40:19.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\Infrastructure\\DbContext\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\DbContext\\AppDbContext.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\Infrastructure\\DbContext\\AppDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\DbContext\\AppDbContext.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAowHoAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T17:25:04.097Z",
               "EditorCaption": ""
             }
           ]

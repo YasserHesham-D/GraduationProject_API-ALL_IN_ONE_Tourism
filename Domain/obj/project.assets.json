@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "Microsoft.AspNetCore.Cryptography.Internal/10.0.7": {
@@ -1067,11 +1067,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\Domain.csproj",
+      "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\yasser hesham\\.nuget\\packages\\",
-      "outputPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\obj\\",
+      "outputPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1090,6 +1090,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -1104,10 +1105,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
@@ -1131,7 +1133,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

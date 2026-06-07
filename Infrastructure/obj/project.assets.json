@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "Azure.Core/1.47.1": {
@@ -4124,11 +4124,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\yasser hesham\\.nuget\\packages\\",
-      "outputPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Infrastructure\\obj\\",
+      "outputPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4147,10 +4147,11 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\Domain\\Domain.csproj"
+            "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Domain\\Domain.csproj"
             }
           }
         }
@@ -4165,10 +4166,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": {
@@ -4204,7 +4206,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
