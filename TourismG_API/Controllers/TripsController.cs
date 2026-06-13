@@ -102,6 +102,7 @@ namespace Presentation.Controllers
         {
             var userId = GetUserId();
             var trip = await context.Trips.FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+            
             if (trip is null)
             {
                 return NotFound();
@@ -178,7 +179,7 @@ namespace Presentation.Controllers
                 Title = title,
                 PlaceId = request.PlaceId,
                 ServiceOfferingId = request.ServiceOfferingId,
-                ScheduledAt = request.ScheduledAt,
+                ScheduledAt = TimeOnly.FromDateTime(DateTime.Now) ,  // "03:34:00"
                 Notes = request.Notes
             };
 
@@ -187,6 +188,7 @@ namespace Presentation.Controllers
 
             return Ok(new TripActivityDto(activity.Id, activity.Title, activity.ScheduledAt, activity.Notes, activity.PlaceId, null, activity.ServiceOfferingId, null));
         }
+
 
         [HttpDelete("{tripId:guid}/activities/{activityId:guid}")]
         public async Task<IActionResult> DeleteActivity(Guid tripId, Guid activityId)
@@ -215,7 +217,7 @@ namespace Presentation.Controllers
 
     public record CreateTripRequest(string Title, DateOnly StartDate, DateOnly? EndDate, string? Notes);
     public record UpdateTripRequest(string? Title, string? Notes);
-    public record CreateTripActivityRequest(string? Title, TimeOnly? ScheduledAt, Guid? PlaceId, Guid? ServiceOfferingId, string? Notes);
+    public record CreateTripActivityRequest(string? Title, Guid? PlaceId, Guid? ServiceOfferingId, string? Notes);
     public record TripSummary(Guid Id, string Title, DateOnly StartDate, DateOnly? EndDate, int DayCount);
     public record TripDetails(Guid Id, string Title, DateOnly StartDate, DateOnly? EndDate, string? Notes, IReadOnlyCollection<TripDayDto> Days);
     public record TripDayDto(Guid Id, int DayNumber, DateOnly Date, IReadOnlyCollection<TripActivityDto> Activities);

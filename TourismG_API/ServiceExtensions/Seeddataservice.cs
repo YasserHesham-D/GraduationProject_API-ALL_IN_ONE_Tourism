@@ -121,7 +121,6 @@ namespace Presentation.ServiceExtensions
                 UserName = "provider",
                 Email = providerEmail,
                 EmailConfirmed = true,
-                Address = "Giza, Egypt"
             };
 
             var result = await _userManager.CreateAsync(provider, providerPassword);

@@ -16,12 +16,10 @@ namespace Presentation.Controllers
     public class AccountsController(UserManager<User> userManager ,IAccountServices accountService,SignInManager<User> signInManager) : ControllerBase
     {
         // sign up : any user register as customer then ask admin for being service provider from settings
-        //
-
 
         [HttpPost]
         [Route("[Action]")]
-        public async Task<IActionResult> SignUp([FromBody] SignUpRequest request) //  delete address , add phone number 
+        public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid Request");
@@ -33,6 +31,11 @@ namespace Presentation.Controllers
                 return BadRequest("Passwords do not match");
 
             var Accesstoken = await accountService.SignUpAsync(request);
+            
+            if (Accesstoken == null)
+            {
+                return StatusCode(500, "Server Error");
+            }
 
             return Ok(Accesstoken);
         }
@@ -133,6 +136,7 @@ namespace Presentation.Controllers
             var result = await userManager.ResetPasswordAsync(user, token, request.NewPassword);
             return result.Succeeded ? Ok(new { message = "Password reset successfully." }) : BadRequest(result.Errors.Select(e => e.Description));
         }
+
 
         [HttpPost]
         [Route("[Action]")]

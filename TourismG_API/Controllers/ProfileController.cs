@@ -33,12 +33,12 @@ namespace Presentation.Controllers
                 user.Id,
                 user.UserName ?? string.Empty,
                 user.Email ?? string.Empty,
-                user.Address,
                 roles.ToArray(),
                 stats));
         }
 
         [HttpPut("me")]
+        
         public async Task<IActionResult> UpdateMe([FromBody] UpdateProfileRequest request)
         {
             var user = await userManager.FindByIdAsync(GetUserId());
@@ -52,7 +52,6 @@ namespace Presentation.Controllers
                 user.UserName = request.FullName;
             }
 
-            user.Address = request.Address;
             var result = await userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
@@ -68,7 +67,7 @@ namespace Presentation.Controllers
         }
     }
 
-    public record ProfileResponse(string Id, string FullName, string Email, string? Address, IReadOnlyCollection<string> Roles, ProfileStats Stats);
+    public record ProfileResponse(string Id, string FullName, string Email, IReadOnlyCollection<string> Roles, ProfileStats Stats);
     public record ProfileStats(int Visited, int Trips, int Saved);
     public record UpdateProfileRequest(string? FullName, string? Address);
 }

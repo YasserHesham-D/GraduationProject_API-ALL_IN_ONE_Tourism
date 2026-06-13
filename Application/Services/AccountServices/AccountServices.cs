@@ -17,21 +17,12 @@ namespace Application.Services.AccountServices
         public async Task<SignInResponse> SignInAsync(User user)
         {
             var Token = await CreateAccessToken(user);
-           // var TokenExpTime = configuration.GetSection("JWT").GetSection("LifeTime").Value;
- 
-            //int x = int.Parse(TokenExpTime);
 
-            //var Rtoken = GenerateRefreshToken();
-            //Rtoken.UserId = employee.Id;
-
-            //await refreshTokenRepo.AddAsync(Rtoken);
-            //await unitOfWork.SaveChangesAsync();
 
             return new SignInResponse
             {
                 Token = Token,
-                //ExpirationDT = DateTime.UtcNow.AddMinutes(x).ToString(),
-                //RefreshToken = Rtoken,
+
             };
         }
 
@@ -42,13 +33,15 @@ namespace Application.Services.AccountServices
             {
                 UserName = request.FullName,
                 Email = request.Email,
-                Address = request.Address
+                PhoneNumber = request.PhoneNumber,
+                Nationality = request.Nationality
             };
             
             var result = await userManager.CreateAsync(user,request.Password);
+
             if (result.Succeeded)
             {
-                var role = request.Role.Equals("Provider", StringComparison.OrdinalIgnoreCase) ? "Provider" : "Customer";
+                var role = "Customer";
                 var roleResult = await userManager.AddToRoleAsync(user, role);
                 
 
@@ -58,7 +51,9 @@ namespace Application.Services.AccountServices
                 {
                     Token = Token,
                 };
+
             }
+
             else return null;
         }
 

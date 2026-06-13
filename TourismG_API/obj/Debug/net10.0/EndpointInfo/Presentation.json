@@ -1277,11 +1277,6 @@
             "type": "string",
             "nullable": true
           },
-          "scheduledAt": {
-            "type": "string",
-            "format": "time",
-            "nullable": true
-          },
           "placeId": {
             "type": "string",
             "format": "uuid",
