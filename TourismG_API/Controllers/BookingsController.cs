@@ -12,7 +12,7 @@ namespace Presentation.Controllers
     public class BookingsController(AppDbContext context) : ControllerBase
     {
         [HttpGet("my")]
-        public async Task<IActionResult> GetMyBookings()
+        public async Task<IActionResult> GetMyBookings()        // customer bookings
         {
             var userId = GetUserId();
             var bookings = await context.Bookings

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Presentation.Controllers
 {
@@ -24,11 +25,23 @@ namespace Presentation.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Invalid Request");
 
+            if ( string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.FullName) || string.IsNullOrEmpty(request.Email)
+                || string.IsNullOrEmpty(request.PhoneNumber) || string.IsNullOrEmpty(request.Nationality))
+                return BadRequest("Fields Required");
+
             if(await userManager.FindByEmailAsync(request.Email) != null)
                 return BadRequest("Email already exists");
 
             if (request.Password != request.ConfirmPassword)
                 return BadRequest("Passwords do not match");
+
+
+            var pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$";
+
+            var result = Regex.IsMatch(request.Password, pattern);
+
+            if (!result)
+                return BadRequest("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.");
 
             var Accesstoken = await accountService.SignUpAsync(request);
             
@@ -49,7 +62,7 @@ namespace Presentation.Controllers
 
             var user = await userManager.FindByEmailAsync(request.Email);
             if (user == null)
-                return Unauthorized("Invalid Email Or Password");
+                return BadRequest("Email And Password Required");
 
             var passwordValid = await signInManager.CheckPasswordSignInAsync(
                 user,
@@ -67,7 +80,10 @@ namespace Presentation.Controllers
 
             var Tokens = await accountService.SignInAsync(user);
 
+            if (Tokens.Message == "success") 
             return Ok(Tokens);
+
+            return StatusCode(500, "ServerError");
         }
 
         [HttpGet]
@@ -94,7 +110,7 @@ namespace Presentation.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = userId is null ? null : await userManager.FindByIdAsync(userId);
-            return user is null ? NotFound() : Ok(new { username = user.UserName, email = user.Email });
+            return user is null ? NotFound() : Ok(new { username = user.UserName });
         }
 
         [HttpPost]
@@ -102,10 +118,11 @@ namespace Presentation.Controllers
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
         {
             var user = await userManager.FindByEmailAsync(request.Email);
-            if (user is null)
-            {
-                return Ok(new { message = "If the email exists, a reset token will be generated." });
-            }
+            if (user == null) return NotFound("Email Not Found");
+
+            if (!user.UserName.Equals(request.Fullname) || !user.Nationality.Equals(request.Nationality))
+                return Conflict("Not Match");
+
 
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
             var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
@@ -131,12 +148,12 @@ namespace Presentation.Controllers
             {
                 return BadRequest("Passwords do not match.");
             }
+            var Tokens = await accountService.SignInAsync(user);
 
             var token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.ResetToken));
             var result = await userManager.ResetPasswordAsync(user, token, request.NewPassword);
-            return result.Succeeded ? Ok(new { message = "Password reset successfully." }) : BadRequest(result.Errors.Select(e => e.Description));
+            return result.Succeeded ? Ok(new {Token = Tokens , message = "Password reset successfully." }) : BadRequest(result.Errors.Select(e => e.Description));
         }
-
 
         [HttpPost]
         [Route("[Action]")]
@@ -161,7 +178,7 @@ namespace Presentation.Controllers
 
     }
 
-    public record ForgotPasswordRequest(string Email);
+    public record ForgotPasswordRequest(string Fullname ,string Email,string Nationality);
     public record ResetPasswordRequest(string Email, string ResetToken, string NewPassword, string ConfirmPassword);
     public record ChangePasswordRequest(string CurrentPassword, string NewPassword, string ConfirmPassword);
 }

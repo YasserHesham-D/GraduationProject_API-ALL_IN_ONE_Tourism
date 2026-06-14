@@ -22,6 +22,7 @@ namespace Application.Services.AccountServices
             return new SignInResponse
             {
                 Token = Token,
+                Message = "success"
 
             };
         }
@@ -34,7 +35,8 @@ namespace Application.Services.AccountServices
                 UserName = request.FullName,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                Nationality = request.Nationality
+                Nationality = request.Nationality,
+                
             };
             
             var result = await userManager.CreateAsync(user,request.Password);
@@ -50,6 +52,7 @@ namespace Application.Services.AccountServices
                 return new SignInResponse
                 {
                     Token = Token,
+                    Message = "success"
                 };
 
             }

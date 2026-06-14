@@ -71,7 +71,11 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// ✅ Correct order
 app.UseCors("AllowAll");
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
@@ -81,14 +85,9 @@ app.UseSwaggerUI(options =>
 });
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
 app.MapControllers();
+
+
 
 using (var scope = app.Services.CreateScope())
 {
