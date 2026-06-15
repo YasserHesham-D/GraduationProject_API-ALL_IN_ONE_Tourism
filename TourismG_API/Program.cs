@@ -45,7 +45,13 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "TourismG API",
         Version = "v1",
-        Description = "API documentation for the TourismG mobile tourism app."
+        Description = "API documentation for the TourismG mobile tourism app.\n\n" +
+                      "**Seeded Test Credentials:**\n" +
+                      "- **Admin:** admin@example.com (Password: `Admin@123456`)\n\n" +
+                     
+                      "- **Providers:** provider1@example.com to provider4@example.com (Password: `Provider@123456`)\n\n" +
+                     
+                      "- **Customers:** customer1@example.com to customer4@example.com (Password: `Customer@123456`)"
     });
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -89,10 +95,10 @@ app.MapControllers();
 
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var seedService = scope.ServiceProvider.GetRequiredService<SeedDataService>();
-    await seedService.InitializeAsync();
-}
+// using (var scope = app.Services.CreateScope())
+// {
+//     var seedService = scope.ServiceProvider.GetRequiredService<SeedDataService>();
+//     await seedService.InitializeAsync();
+// }
 
 app.Run();

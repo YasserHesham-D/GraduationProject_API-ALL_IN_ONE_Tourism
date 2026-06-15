@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using Application.Dtos.ProviderManagement;
+using Application.Services.ProviderServices;
 using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Authorization;
@@ -10,15 +12,23 @@ namespace Presentation.Controllers
     [Route("api/provider")]
     [ApiController]
     [Authorize]
-    public class ProviderController(AppDbContext context) : ControllerBase
+    public class ProviderController : ControllerBase
     {
+        private readonly AppDbContext _context;
+        private readonly IProviderService _providerService;
+
+        public ProviderController(AppDbContext context, IProviderService providerService)
+        {
+            _context = context;
+            _providerService = providerService;
+        }
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
         {
             var providerId = GetUserId();
-            var services = context.ServiceOfferings.AsNoTracking().Where(s => s.ProviderId == providerId);
+            var services = _context.ServiceOfferings.AsNoTracking().Where(s => s.ProviderId == providerId);
             var serviceIds = await services.Select(s => s.Id).ToListAsync();
-            var bookings = context.Bookings.AsNoTracking().Where(b => serviceIds.Contains(b.ServiceOfferingId));
+            var bookings = _context.Bookings.AsNoTracking().Where(b => serviceIds.Contains(b.ServiceOfferingId));
 
             var totalEarnings = await bookings.Where(b => b.Status != "cancelled").SumAsync(b => b.TotalPrice);
             var totalBookings = await bookings.CountAsync();
@@ -50,7 +60,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetMyServices()
         {
             var providerId = GetUserId();
-            var services = await context.ServiceOfferings
+            var services = await _context.ServiceOfferings
                 .AsNoTracking()
                 .Where(s => s.ProviderId == providerId)
                 .OrderByDescending(s => s.CreatedAt)
@@ -78,7 +88,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetMyService(Guid id)
         {
             var providerId = GetUserId();
-            var service = await context.ServiceOfferings
+            var service = await _context.ServiceOfferings
                 .AsNoTracking()
                 .Where(s => s.Id == id && s.ProviderId == providerId)
                 .Select(s => new ProviderServiceItem(
@@ -114,7 +124,7 @@ namespace Presentation.Controllers
                 return BadRequest("Price cannot be negative.");
             }
 
-            if (request.PlaceId.HasValue && !await context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
+            if (request.PlaceId.HasValue && !await _context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
             {
                 return BadRequest("Place not found.");
             }
@@ -136,8 +146,8 @@ namespace Presentation.Controllers
                 IsActive = request.IsActive ?? true
             };
 
-            await context.ServiceOfferings.AddAsync(service);
-            await context.SaveChangesAsync();
+            await _context.ServiceOfferings.AddAsync(service);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetMyService), new { id = service.Id }, service.Id);
         }
@@ -146,13 +156,13 @@ namespace Presentation.Controllers
         public async Task<IActionResult> UpdateService(Guid id, [FromBody] UpsertServiceRequest request)
         {
             var providerId = GetUserId();
-            var service = await context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
+            var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
                 return NotFound();
             }
 
-            if (request.PlaceId.HasValue && !await context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
+            if (request.PlaceId.HasValue && !await _context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
             {
                 return BadRequest("Place not found.");
             }
@@ -170,7 +180,7 @@ namespace Presentation.Controllers
             service.Rating = request.Rating;
             service.IsActive = request.IsActive ?? service.IsActive;
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
@@ -178,14 +188,14 @@ namespace Presentation.Controllers
         public async Task<IActionResult> DeleteService(Guid id)
         {
             var providerId = GetUserId();
-            var service = await context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
+            var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
                 return NotFound();
             }
 
-            context.ServiceOfferings.Remove(service);
-            await context.SaveChangesAsync();
+            _context.ServiceOfferings.Remove(service);
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
@@ -193,7 +203,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetBookings()
         {
             var providerId = GetUserId();
-            var bookings = await context.Bookings
+            var bookings = await _context.Bookings
                 .AsNoTracking()
                 .Where(b => b.ServiceOffering!.ProviderId == providerId)
                 .OrderByDescending(b => b.CreatedAt)
@@ -214,7 +224,7 @@ namespace Presentation.Controllers
         public async Task<IActionResult> UpdateBookingStatus(Guid id, [FromBody] UpdateBookingStatusRequest request)
         {
             var providerId = GetUserId();
-            var booking = await context.Bookings
+            var booking = await _context.Bookings
                 .Include(b => b.ServiceOffering)
                 .FirstOrDefaultAsync(b => b.Id == id && b.ServiceOffering!.ProviderId == providerId);
 
@@ -224,8 +234,134 @@ namespace Presentation.Controllers
             }
 
             booking.Status = request.Status;
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return NoContent();
+        }
+
+        // Provider Request Endpoints
+        [HttpPost("request")]
+        public async Task<IActionResult> SubmitProviderRequest([FromBody] CreateProviderRequestDto request)
+        {
+            try
+            {
+                var userId = GetUserId();
+                var response = await _providerService.SubmitProviderRequestAsync(request, userId);
+                return Ok(new { success = true, data = response, message = "Provider request submitted successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet("request/my")]
+        public async Task<IActionResult> GetMyProviderRequest()
+        {
+            try
+            {
+                var userId = GetUserId();
+                var response = await _providerService.GetMyProviderRequestAsync(userId);
+                if (response == null)
+                    return NotFound(new { success = false, message = "No provider request found" });
+
+                return Ok(new { success = true, data = response });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        // Provider Earnings Endpoint
+        [HttpGet("earnings")]
+        public async Task<IActionResult> GetProviderEarnings()
+        {
+            try
+            {
+                var providerId = GetUserId();
+                var earnings = await _providerService.GetProviderEarningsAsync(providerId);
+                if (earnings == null)
+                    return NotFound(new { success = false, message = "No earnings record found" });
+
+                return Ok(new { success = true, data = earnings });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        // Provider Booking Management Endpoints
+        [HttpPut("bookings/{id:guid}/confirm")]
+        public async Task<IActionResult> ConfirmBooking(Guid id)
+        {
+            try
+            {
+                var providerId = GetUserId();
+                var result = await _providerService.ConfirmBookingAsync(id, providerId);
+                if (!result)
+                    return NotFound(new { success = false, message = "Booking not found or not authorized" });
+
+                return Ok(new { success = true, message = "Booking confirmed successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPut("bookings/{id:guid}/decline")]
+        public async Task<IActionResult> DeclineBooking(Guid id)
+        {
+            try
+            {
+                var providerId = GetUserId();
+                var result = await _providerService.DeclineBookingAsync(id, providerId);
+                if (!result)
+                    return NotFound(new { success = false, message = "Booking not found or not authorized" });
+
+                return Ok(new { success = true, message = "Booking declined successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPut("bookings/{id:guid}/complete")]
+        public async Task<IActionResult> CompleteBooking(Guid id)
+        {
+            try
+            {
+                var providerId = GetUserId();
+                var result = await _providerService.CompleteBookingAsync(id, providerId);
+                if (!result)
+                    return NotFound(new { success = false, message = "Booking not found or not authorized" });
+
+                return Ok(new { success = true, message = "Booking completed successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost("bookings/{id:guid}/contact")]
+        public async Task<IActionResult> ContactUserForBooking(Guid id, [FromBody] ProviderContactRequestDto request)
+        {
+            try
+            {
+                var providerId = GetUserId();
+                var result = await _providerService.ContactUserAsync(id, providerId, request.Message);
+                if (!result)
+                    return NotFound(new { success = false, message = "Booking not found or not authorized" });
+
+                return Ok(new { success = true, message = "Message sent to user successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
         }
 
         private string GetUserId()

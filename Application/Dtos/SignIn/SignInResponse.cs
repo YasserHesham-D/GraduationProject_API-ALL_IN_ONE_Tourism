@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,5 +9,6 @@ namespace Application.Dtos.SignIn
     {
         public string Token { get; set; } = string.Empty;
         public string Message { get; set; } = string.Empty; 
+        
     }
 }

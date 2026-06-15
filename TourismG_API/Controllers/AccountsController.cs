@@ -64,6 +64,8 @@ namespace Presentation.Controllers
             if (user == null)
                 return BadRequest("Email And Password Required");
 
+            var role = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+
             var passwordValid = await signInManager.CheckPasswordSignInAsync(
                 user,
                 request.Password,
@@ -81,7 +83,14 @@ namespace Presentation.Controllers
             var Tokens = await accountService.SignInAsync(user);
 
             if (Tokens.Message == "success") 
-            return Ok(Tokens);
+            return Ok(new
+            {
+                Tokens,
+                user.Email,
+                user.UserName,
+                role
+
+            });
 
             return StatusCode(500, "ServerError");
         }

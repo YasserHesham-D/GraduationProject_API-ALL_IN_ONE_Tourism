@@ -21,6 +21,22 @@ namespace Infrastructure.DbContext
         public DbSet<PlaceReview> PlaceReviews => Set<PlaceReview>();
         public DbSet<TripReview> TripReviews => Set<TripReview>();
 
+        // New entities for Hotels, Transport, Programs, Guides
+        public DbSet<Hotel> Hotels => Set<Hotel>();
+        public DbSet<Transport> Transports => Set<Transport>();
+        public DbSet<Program> Programs => Set<Program>();
+        public DbSet<Guide> Guides => Set<Guide>();
+
+        // Booking entities
+        public DbSet<HotelBooking> HotelBookings => Set<HotelBooking>();
+        public DbSet<TransportBooking> TransportBookings => Set<TransportBooking>();
+        public DbSet<ProgramBooking> ProgramBookings => Set<ProgramBooking>();
+        public DbSet<GuideBooking> GuideBookings => Set<GuideBooking>();
+
+        // Provider entities
+        public DbSet<ProviderRequest> ProviderRequests => Set<ProviderRequest>();
+        public DbSet<ProviderEarnings> ProviderEarnings => Set<ProviderEarnings>();
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -123,6 +139,136 @@ namespace Infrastructure.DbContext
                 entity.HasIndex(r => new { r.UserId, r.TripId }).IsUnique();
                 entity.HasOne(r => r.User).WithMany().HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(r => r.Trip).WithMany(t => t.Reviews).HasForeignKey(r => r.TripId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Hotel configuration
+            builder.Entity<Hotel>(entity =>
+            {
+                entity.Property(h => h.Name).HasMaxLength(200).IsRequired();
+                entity.Property(h => h.Location).HasMaxLength(200).IsRequired();
+                entity.Property(h => h.City).HasMaxLength(100).IsRequired();
+                entity.Property(h => h.Country).HasMaxLength(100);
+                entity.Property(h => h.Description).HasMaxLength(2000);
+                entity.Property(h => h.ImageUrl).HasMaxLength(500);
+                entity.Property(h => h.PricePerNight).HasPrecision(18, 2);
+                entity.Property(h => h.Rating).HasPrecision(3, 2);
+                entity.Property(h => h.Amenities).HasMaxLength(1000);
+                entity.Property(h => h.ContactNumber).HasMaxLength(20);
+                entity.Property(h => h.Email).HasMaxLength(255);
+                entity.HasOne(h => h.Provider).WithMany().HasForeignKey(h => h.ProviderId).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Transport configuration
+            builder.Entity<Transport>(entity =>
+            {
+                entity.Property(t => t.Name).HasMaxLength(200).IsRequired();
+                entity.Property(t => t.Type).HasMaxLength(100).IsRequired();
+                entity.Property(t => t.Description).HasMaxLength(2000);
+                entity.Property(t => t.ImageUrl).HasMaxLength(500);
+                entity.Property(t => t.DepartureLocation).HasMaxLength(200).IsRequired();
+                entity.Property(t => t.ArrivalLocation).HasMaxLength(200).IsRequired();
+                entity.Property(t => t.DepartureTime).HasMaxLength(20);
+                entity.Property(t => t.ArrivalTime).HasMaxLength(20);
+                entity.Property(t => t.Price).HasPrecision(18, 2);
+                entity.Property(t => t.Rating).HasPrecision(3, 2);
+                entity.HasOne(t => t.Provider).WithMany().HasForeignKey(t => t.ProviderId).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Program configuration
+            builder.Entity<Program>(entity =>
+            {
+                entity.Property(p => p.Name).HasMaxLength(200).IsRequired();
+                entity.Property(p => p.Description).HasMaxLength(2000);
+                entity.Property(p => p.ImageUrl).HasMaxLength(500);
+                entity.Property(p => p.Category).HasMaxLength(100);
+                entity.Property(p => p.Location).HasMaxLength(200).IsRequired();
+                entity.Property(p => p.City).HasMaxLength(100).IsRequired();
+                entity.Property(p => p.Country).HasMaxLength(100);
+                entity.Property(p => p.Price).HasPrecision(18, 2);
+                entity.Property(p => p.IncludedServices).HasMaxLength(1000);
+                entity.Property(p => p.Rating).HasPrecision(3, 2);
+                entity.HasOne(p => p.Provider).WithMany().HasForeignKey(p => p.ProviderId).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Guide configuration
+            builder.Entity<Guide>(entity =>
+            {
+                entity.Property(g => g.FullName).HasMaxLength(200).IsRequired();
+                entity.Property(g => g.PhoneNumber).HasMaxLength(20).IsRequired();
+                entity.Property(g => g.Email).HasMaxLength(255).IsRequired();
+                entity.Property(g => g.Description).HasMaxLength(2000);
+                entity.Property(g => g.Nationality).HasMaxLength(100);
+                entity.Property(g => g.Languages).HasMaxLength(500);
+                entity.Property(g => g.Specialization).HasMaxLength(200);
+                entity.Property(g => g.ImageUrl).HasMaxLength(500);
+                entity.Property(g => g.Bio).HasMaxLength(2000);
+                entity.Property(g => g.PricePerDay).HasPrecision(18, 2);
+                entity.Property(g => g.Rating).HasPrecision(3, 2);
+                entity.HasOne(g => g.Provider).WithMany().HasForeignKey(g => g.ProviderId).OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // HotelBooking configuration
+            builder.Entity<HotelBooking>(entity =>
+            {
+                entity.Property(b => b.Status).HasMaxLength(40).IsRequired();
+                entity.Property(b => b.TotalPrice).HasPrecision(18, 2);
+                entity.Property(b => b.SpecialRequests).HasMaxLength(1000);
+                entity.HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(b => b.Hotel).WithMany(h => h.Bookings).HasForeignKey(b => b.HotelId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // TransportBooking configuration
+            builder.Entity<TransportBooking>(entity =>
+            {
+                entity.Property(b => b.Status).HasMaxLength(40).IsRequired();
+                entity.Property(b => b.TotalPrice).HasPrecision(18, 2);
+                entity.HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(b => b.Transport).WithMany(t => t.Bookings).HasForeignKey(b => b.TransportId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ProgramBooking configuration
+            builder.Entity<ProgramBooking>(entity =>
+            {
+                entity.Property(b => b.Status).HasMaxLength(40).IsRequired();
+                entity.Property(b => b.TotalPrice).HasPrecision(18, 2);
+                entity.HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(b => b.Program).WithMany(p => p.Bookings).HasForeignKey(b => b.ProgramId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // GuideBooking configuration
+            builder.Entity<GuideBooking>(entity =>
+            {
+                entity.Property(b => b.Status).HasMaxLength(40).IsRequired();
+                entity.Property(b => b.TotalPrice).HasPrecision(18, 2);
+                entity.Property(b => b.SpecialRequests).HasMaxLength(1000);
+                entity.HasOne(b => b.User).WithMany().HasForeignKey(b => b.UserId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(b => b.Guide).WithMany(g => g.Bookings).HasForeignKey(b => b.GuideId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ProviderRequest configuration
+            builder.Entity<ProviderRequest>(entity =>
+            {
+                entity.Property(r => r.BusinessName).HasMaxLength(200).IsRequired();
+                entity.Property(r => r.BusinessType).HasMaxLength(100).IsRequired();
+                entity.Property(r => r.BusinessDescription).HasMaxLength(2000);
+                entity.Property(r => r.ContactNumber).HasMaxLength(20);
+                entity.Property(r => r.Email).HasMaxLength(255);
+                entity.Property(r => r.TaxNumber).HasMaxLength(50);
+                entity.Property(r => r.RegistrationNumber).HasMaxLength(50);
+                entity.Property(r => r.DocumentUrl).HasMaxLength(500);
+                entity.Property(r => r.Status).HasMaxLength(40).IsRequired();
+                entity.Property(r => r.RejectionReason).HasMaxLength(500);
+                entity.HasOne(r => r.User).WithMany().HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ProviderEarnings configuration
+            builder.Entity<ProviderEarnings>(entity =>
+            {
+                entity.Property(e => e.TotalEarnings).HasPrecision(18, 2);
+                entity.Property(e => e.PendingEarnings).HasPrecision(18, 2);
+                entity.Property(e => e.WithdrawnAmount).HasPrecision(18, 2);
+                entity.HasIndex(e => e.ProviderId).IsUnique();
+                entity.HasOne(e => e.Provider).WithMany().HasForeignKey(e => e.ProviderId).OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
