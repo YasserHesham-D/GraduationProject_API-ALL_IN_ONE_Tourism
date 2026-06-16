@@ -367,27 +367,6 @@
   },
   {
     "ContainingType": "Presentation.Controllers.PlacesController",
-    "Method": "GetNearbyPlaces",
-    "RelativePath": "api/Places/{id}/nearby",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "take",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.PlacesController",
     "Method": "GetCategories",
     "RelativePath": "api/Places/categories",
     "HttpMethod": "GET",
@@ -416,6 +395,22 @@
       },
       {
         "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.PlacesController",
+    "Method": "GetRecommendedPlaces",
+    "RelativePath": "api/Places/GetRecommendedPlaces",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "take",
         "Type": "System.Int32",
         "IsRequired": false
       }

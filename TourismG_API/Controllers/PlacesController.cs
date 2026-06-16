@@ -133,11 +133,11 @@ namespace Presentation.Controllers
             return Ok(place);
         }
 
-        [HttpGet("category/{category}")]
-        public async Task<IActionResult> GetPlacesByCategory(string category, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
-        {
-            return await GetPlaces(null, category, null, null, page, pageSize);
-        }
+        //[HttpGet("category/{category}")]
+        //public async Task<IActionResult> GetPlacesByCategory(string category, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        //{
+        //    return await GetPlaces(null, category, null, null, page, pageSize);
+        //}
 
         [HttpGet("summary")]
         public async Task<IActionResult> GetPlaceSummaries()
@@ -157,22 +157,15 @@ namespace Presentation.Controllers
             return Ok(places);
         }
 
-        [HttpGet("{id:guid}/nearby")]
-        public async Task<IActionResult> GetNearbyPlaces(Guid id, [FromQuery] int take = 5)
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> GetRecommendedPlaces()
         {
-            take = Math.Clamp(take, 1, 20);
-            var source = await context.Places.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-            if (source is null)
-            {
-                return NotFound();
-            }
+            
 
-            var nearby = await context.Places
+            var Recomended = await context.Places
                 .AsNoTracking()
-                .Where(p => p.Id != id && (p.City == source.City || p.Category == source.Category))
-                .OrderByDescending(p => p.City == source.City)
-                .ThenByDescending(p => p.Rating)
-                .Take(take)
+                .Where(p => p.IsRecommended).Where(x => x.IsPopular).OrderBy(x => x.Rating)
+                .Take(5)
                 .Select(p => new PlaceListItem(
                     p.Id,
                     p.Name,
@@ -188,21 +181,21 @@ namespace Presentation.Controllers
                     p.IsPopular))
                 .ToListAsync();
 
-            return Ok(nearby);
+            return Ok(Recomended);
         }
 
-        [HttpGet("categories")]
-        public async Task<IActionResult> GetCategories()
-        {
-            var categories = await context.Places
-                .AsNoTracking()
-                .Select(p => p.Category)
-                .Distinct()
-                .OrderBy(c => c)
-                .ToListAsync();
+        //[HttpGet("categories")]
+        //public async Task<IActionResult> GetCategories()
+        //{
+        //    var categories = await context.Places
+        //        .AsNoTracking()
+        //        .Select(p => p.Category)
+        //        .Distinct()
+        //        .OrderBy(c => c)
+        //        .ToListAsync();
 
-            return Ok(new[] { "All" }.Concat(categories));
-        }
+        //    return Ok(new[] { "All" }.Concat(categories));
+        //}
     }
 
     public record PagedResponse<T>(IReadOnlyCollection<T> Items, int Page, int PageSize, int TotalCount);
