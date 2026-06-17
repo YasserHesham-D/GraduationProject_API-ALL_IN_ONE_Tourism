@@ -111,7 +111,7 @@ namespace Presentation.Controllers
             return service is null ? NotFound() : Ok(service);
         }
 
-        [HttpPost("services")]
+        [HttpPost("Addservices")]
         public async Task<IActionResult> AddService([FromBody] UpsertServiceRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Title))
@@ -149,7 +149,7 @@ namespace Presentation.Controllers
             await _context.ServiceOfferings.AddAsync(service);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetMyService), new { id = service.Id }, service.Id);
+            return Ok("Service Added Success");
         }
 
         [HttpPut("services/{id:guid}")]
@@ -159,7 +159,7 @@ namespace Presentation.Controllers
             var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
-                return NotFound();
+                return Unauthorized("Not Your Servcie");
             }
 
             if (request.PlaceId.HasValue && !await _context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
@@ -181,7 +181,7 @@ namespace Presentation.Controllers
             service.IsActive = request.IsActive ?? service.IsActive;
 
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok("Service UPdated SUccess");
         }
 
         [HttpDelete("services/{id:guid}")]
@@ -191,12 +191,13 @@ namespace Presentation.Controllers
             var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
-                return NotFound();
+                return Unauthorized("ITS Not your Service to delete  it");
             }
 
             _context.ServiceOfferings.Remove(service);
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            return Ok("Service Deleted Success");
         }
 
         [HttpGet("bookings")]
@@ -230,12 +231,13 @@ namespace Presentation.Controllers
 
             if (booking is null)
             {
-                return NotFound();
+                return Unauthorized("Its NOt your Service To update it ");
             }
 
             booking.Status = request.Status;
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            return Ok("Service Update Success");
         }
 
         // Provider Request Endpoints
@@ -364,6 +366,9 @@ namespace Presentation.Controllers
             }
         }
 
+
+      
+
         private string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException("Missing user id claim.");
@@ -373,6 +378,7 @@ namespace Presentation.Controllers
     public record ProviderDashboard(decimal TotalEarnings, int TotalBookings, int ThisMonthBookings, decimal Rating, IReadOnlyCollection<ProviderBookingItem> RecentBookings);
     public record ProviderBookingItem(Guid Id, string ServiceTitle, string CustomerName, DateTime BookingDate, int Guests, decimal TotalPrice, string Status);
     public record ProviderServiceItem(Guid Id, string Title, string Category, string Description, decimal Price, string Currency, string Duration, string LocationName, string ImageUrl, string Availability, decimal Rating, int BookingCount, bool IsActive, Guid? PlaceId);
+    public record ProviderPlaceItem(Guid Id, string Name, string Category, string City, string Country, string LocationName, string Description, string ImageUrl, string OpeningHours, decimal Rating, int ReviewCount, decimal? PriceFrom, decimal? DistanceKm, decimal? Latitude, decimal? Longitude, bool IsRecommended, bool IsPopular);
     public record UpsertServiceRequest(Guid? PlaceId, string Title, string Category, string Description, decimal Price, string? Currency, string Duration, string LocationName, string ImageUrl, string Availability, decimal Rating, bool? IsActive);
     public record UpdateBookingStatusRequest(string Status);
-}
+  }

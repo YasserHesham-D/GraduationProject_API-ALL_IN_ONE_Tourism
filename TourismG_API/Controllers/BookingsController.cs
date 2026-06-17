@@ -117,19 +117,61 @@ namespace Presentation.Controllers
             return Ok(all);
         }
 
-        [HttpDelete("{id:guid}")]
+        [HttpDelete("CancelBooking/{id:guid}")]
         public async Task<IActionResult> CancelBooking(Guid id)
         {
             var userId = GetUserId();
-            var booking = await context.Bookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
-            if (booking is null)
+
+            // Try Service Booking
+            var serviceBooking = await context.Bookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (serviceBooking is not null)
             {
-                return NotFound();
+                serviceBooking.Status = "cancelled";
+                var result = await context.SaveChangesAsync();
+                return Ok(new { message = "Service booking cancelled", changes = result });
             }
 
-            booking.Status = "cancelled";
-            await context.SaveChangesAsync();
-            return NoContent();
+            // Try Hotel Booking
+            var hotelBooking = await context.HotelBookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (hotelBooking is not null)
+            {
+                hotelBooking.Status = "cancelled";
+                hotelBooking.UpdatedAt = DateTime.UtcNow;
+                var result = await context.SaveChangesAsync();
+                return Ok(new { message = "Hotel booking cancelled", changes = result });
+            }
+
+            // Try Transport Booking
+            var transportBooking = await context.TransportBookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (transportBooking is not null)
+            {
+                transportBooking.Status = "cancelled";
+                transportBooking.UpdatedAt = DateTime.UtcNow;
+                var result = await context.SaveChangesAsync();
+                return Ok(new { message = "Transport booking cancelled", changes = result });
+            }
+
+            // Try Program Booking
+            var programBooking = await context.ProgramBookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (programBooking is not null)
+            {
+                programBooking.Status = "cancelled";
+                programBooking.UpdatedAt = DateTime.UtcNow;
+                var result = await context.SaveChangesAsync();
+                return Ok(new { message = "Program booking cancelled", changes = result });
+            }
+
+            // Try Guide Booking
+            var guideBooking = await context.GuideBookings.FirstOrDefaultAsync(b => b.Id == id && b.UserId == userId);
+            if (guideBooking is not null)
+            {
+                guideBooking.Status = "cancelled";
+                guideBooking.UpdatedAt = DateTime.UtcNow;
+                var result = await context.SaveChangesAsync();
+                return Ok(new { message = "Guide booking cancelled", changes = result });
+            }
+
+            return NotFound(new { message = "Booking not found" });
         }
 
         private string GetUserId()

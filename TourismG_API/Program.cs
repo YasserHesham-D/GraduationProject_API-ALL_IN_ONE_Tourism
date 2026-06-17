@@ -79,7 +79,9 @@ var app = builder.Build();
 
 // ✅ Correct order
 app.UseCors("AllowAll");
+
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -89,8 +91,8 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "TourismG API v1");
     options.RoutePrefix = "swagger";
 });
-
 app.MapGet("/", () => Results.Redirect("/swagger"));
+
 app.MapControllers();
 
 

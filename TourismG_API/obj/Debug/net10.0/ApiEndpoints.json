@@ -191,7 +191,7 @@
   {
     "ContainingType": "Presentation.Controllers.BookingsController",
     "Method": "CancelBooking",
-    "RelativePath": "api/Bookings/{id}",
+    "RelativePath": "api/Bookings/CancelBooking/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -367,36 +367,16 @@
   },
   {
     "ContainingType": "Presentation.Controllers.PlacesController",
-    "Method": "GetCategories",
-    "RelativePath": "api/Places/categories",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.PlacesController",
-    "Method": "GetPlacesByCategory",
-    "RelativePath": "api/Places/category/{category}",
-    "HttpMethod": "GET",
+    "Method": "AddPlace",
+    "RelativePath": "api/Places/AddPlace",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "category",
-        "Type": "System.String",
+        "Name": "request",
+        "Type": "Presentation.Controllers.CreatePlaceRequest",
         "IsRequired": true
-      },
-      {
-        "Name": "page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -408,11 +388,52 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.PlacesController",
+    "Method": "GetMyPlaces",
+    "RelativePath": "api/Places/places",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.PlacesController",
+    "Method": "UpdatePlace",
+    "RelativePath": "api/Places/places/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
     "Parameters": [
       {
-        "Name": "take",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Presentation.Controllers.CreatePlaceRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.PlacesController",
+    "Method": "DeletePlace",
+    "RelativePath": "api/Places/places/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -495,6 +516,22 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Programs.BookProgramRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ProviderController",
+    "Method": "AddService",
+    "RelativePath": "api/provider/Addservices",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Presentation.Controllers.UpsertServiceRequest",
         "IsRequired": true
       }
     ],
@@ -654,22 +691,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "AddService",
-    "RelativePath": "api/provider/services",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Presentation.Controllers.UpsertServiceRequest",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {

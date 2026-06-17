@@ -1,6 +1,8 @@
+using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Presentation.Controllers
 {
@@ -133,6 +135,121 @@ namespace Presentation.Controllers
             return Ok(place);
         }
 
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> AddPlace([FromBody] CreatePlaceRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Name))
+                return BadRequest(new { success = false, message = "Place name is required" });
+
+            if (string.IsNullOrWhiteSpace(request.City))
+                return BadRequest(new { success = false, message = "City is required" });
+
+            if (string.IsNullOrWhiteSpace(request.LocationName))
+                return BadRequest(new { success = false, message = "Location name is required" });
+
+            var place = new Place
+            {
+                Id = Guid.NewGuid(),
+                Name = request.Name,
+                Category = request.Category ?? string.Empty,
+                LocationName = request.LocationName,
+                City = request.City,
+                Country = request.Country ?? "Egypt",
+                Description = request.Description ?? string.Empty,
+                ImageUrl = request.ImageUrl ?? string.Empty,
+                OpeningHours = request.OpeningHours ?? string.Empty,
+                Rating = request.Rating ?? 0m,
+                ReviewCount = 0,
+                PriceFrom = request.PriceFrom,
+                DistanceKm = request.DistanceKm,
+                Latitude = request.Latitude,
+                Longitude = request.Longitude,
+                IsRecommended = request.IsRecommended ?? false,
+                IsPopular = request.IsPopular ?? false,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await context.Places.AddAsync(place);
+            await context.SaveChangesAsync();
+
+            return Ok(new{message = "Place added successfully" });
+        }
+
+
+        // Place Management Endpoints
+        [HttpGet("places")]
+        public async Task<IActionResult> GetMyPlaces()
+        {
+            var providerId = GetUserId();
+            var places = await context.Places
+                .AsNoTracking()
+                .OrderByDescending(p => p.CreatedAt)
+                .Select(p => new ProviderPlaceItem(
+                    p.Id,
+                    p.Name,
+                    p.Category,
+                    p.City,
+                    p.Country,
+                    p.LocationName,
+                    p.Description,
+                    p.ImageUrl,
+                    p.OpeningHours,
+                    p.Rating,
+                    p.ReviewCount,
+                    p.PriceFrom,
+                    p.DistanceKm,
+                    p.Latitude,
+                    p.Longitude,
+                    p.IsRecommended,
+                    p.IsPopular))
+                .ToListAsync();
+
+            return Ok(places);
+        }
+        [HttpPut("places/{id:guid}")]
+        public async Task<IActionResult> UpdatePlace(Guid id, [FromBody] CreatePlaceRequest request)
+        {
+            var place = await context.Places.FirstOrDefaultAsync(p => p.Id == id);
+            if (place is null)
+                return NotFound(new { success = false, message = "Place not found" });
+
+            if (string.IsNullOrWhiteSpace(request.Name))
+                return BadRequest(new { success = false, message = "Place name is required" });
+
+            if (string.IsNullOrWhiteSpace(request.City))
+                return BadRequest(new { success = false, message = "City is required" });
+
+            place.Name = request.Name;
+            place.Category = request.Category ?? place.Category;
+            place.LocationName = request.LocationName ?? place.LocationName;
+            place.City = request.City;
+            place.Country = request.Country ?? place.Country;
+            place.Description = request.Description ?? place.Description;
+            place.ImageUrl = request.ImageUrl ?? place.ImageUrl;
+            place.OpeningHours = request.OpeningHours ?? place.OpeningHours;
+            place.PriceFrom = request.PriceFrom ?? place.PriceFrom;
+            place.DistanceKm = request.DistanceKm ?? place.DistanceKm;
+            place.Latitude = request.Latitude ?? place.Latitude;
+            place.Longitude = request.Longitude ?? place.Longitude;
+            place.IsRecommended = request.IsRecommended ?? place.IsRecommended;
+            place.IsPopular = request.IsPopular ?? place.IsPopular;
+
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("places/{id:guid}")]
+        public async Task<IActionResult> DeletePlace(Guid id)
+        {
+            var place = await context.Places.FirstOrDefaultAsync(p => p.Id == id);
+            if (place is null)
+                return NotFound(new { success = false, message = "Place not found" });
+
+            context.Places.Remove(place);
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
         //[HttpGet("category/{category}")]
         //public async Task<IActionResult> GetPlacesByCategory(string category, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
         //{
@@ -196,6 +313,10 @@ namespace Presentation.Controllers
 
         //    return Ok(new[] { "All" }.Concat(categories));
         //}
+        private string GetUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException("Missing user id claim.");
+        }
     }
 
     public record PagedResponse<T>(IReadOnlyCollection<T> Items, int Page, int PageSize, int TotalCount);
@@ -237,6 +358,7 @@ namespace Presentation.Controllers
     public record PlaceSummary(Guid Id, string Name, string LocationName, string ImageUrl, decimal Rating, decimal? PriceFrom);
     public record NearbyPlaceDto(Guid Id, string Name, decimal Rating, string LocationName, string ImageUrl);
     public record ReviewDto(Guid Id, int Rating, string Comment, string Username, DateTime CreatedAt);
+    public record CreatePlaceRequest(string Name, string? Category, string LocationName, string City, string? Country, string? Description, string? ImageUrl, string? OpeningHours, decimal? Rating, decimal? PriceFrom, decimal? DistanceKm, decimal? Latitude, decimal? Longitude, bool? IsRecommended, bool? IsPopular);
 
     public record ServiceSummary(
         Guid Id,

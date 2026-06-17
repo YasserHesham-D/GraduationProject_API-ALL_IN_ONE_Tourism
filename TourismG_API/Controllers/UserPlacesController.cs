@@ -48,9 +48,11 @@ namespace Presentation.Controllers
             {
                 await context.SavedPlaces.AddAsync(new SavedPlace { UserId = userId, PlaceId = placeId });
                 await context.SaveChangesAsync();
-            }
 
-            return NoContent();
+                return Ok();
+
+            }
+            return StatusCode(404,"Already Exist");
         }
 
         [HttpDelete("saved/{placeId:guid}")]
