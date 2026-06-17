@@ -1,7 +1,10 @@
 using System.Security.Claims;
+using Application.Dtos.Common;
+using Presentation.Services;
 using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +14,7 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProfileController(UserManager<User> userManager, AppDbContext context) : ControllerBase
+    public class ProfileController(UserManager<User> userManager, AppDbContext context, IFileUploadService fileUploadService) : ControllerBase
     {
         [HttpGet("me")]
         public async Task<IActionResult> GetMe()
@@ -59,6 +62,52 @@ namespace Presentation.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost("upload-avatar")]
+        public async Task<IActionResult> UploadAvatar([FromForm] UploadPhotoRequest request)
+        {
+            var userId = GetUserId();
+            var user = await userManager.FindByIdAsync(userId);
+            if (user is null)
+            {
+                return NotFound("User not found");
+            }
+
+            if (request.Photo is null || request.Photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            try
+            {
+                if (!fileUploadService.ValidateFile(request.Photo))
+                {
+                    return BadRequest("Invalid file. Allowed formats: JPG, PNG, WEBP, GIF, BMP. Max size: 5 MB");
+                }
+
+                var photoUrl = await fileUploadService.UploadFileAsync(request.Photo, "uploads");
+
+                // Delete old avatar if it exists
+                if (!string.IsNullOrEmpty(user.ProfileImageUrl))
+                {
+                    fileUploadService.DeleteFile(user.ProfileImageUrl);
+                }
+
+                user.ProfileImageUrl = photoUrl;
+                var result = await userManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    return BadRequest(result.Errors.Select(e => e.Description));
+                }
+
+                return Ok(new UploadPhotoResponse(true, photoUrl));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
+            }
         }
 
         private string GetUserId()

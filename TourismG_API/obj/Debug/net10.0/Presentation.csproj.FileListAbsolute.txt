@@ -336,5 +336,6 @@ D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net1
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.pdb
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.genruntimeconfig.cache
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\ref\Presentation.dll
-D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.MvcApplicationPartsAssemblyInfo.cs
+D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\bin\Debug\net10.0\Presentation.staticwebassets.runtime.json
+D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

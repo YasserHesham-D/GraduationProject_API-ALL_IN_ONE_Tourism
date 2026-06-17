@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6qvaZrky8oM=",
+  "dgSpecHash": "TZoJeLc0IDg=",
   "success": true,
   "projectFilePath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Application\\Application.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\yasser hesham\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\10.0.7\\microsoft.aspnetcore.cryptography.internal.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\10.0.7\\microsoft.aspnetcore.cryptography.keyderivation.10.0.7.nupkg.sha512",
+    "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\10.0.7\\microsoft.aspnetcore.identity.entityframeworkcore.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.bcl.cryptography\\9.0.4\\microsoft.bcl.cryptography.9.0.4.nupkg.sha512",
@@ -27,6 +29,8 @@
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.7\\microsoft.extensions.dependencyinjection.abstractions.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.diagnostics\\10.0.7\\microsoft.extensions.diagnostics.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.7\\microsoft.extensions.diagnostics.abstractions.10.0.7.nupkg.sha512",
+    "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.0\\microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\10.0.0\\microsoft.extensions.hosting.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.identity.core\\10.0.7\\microsoft.extensions.identity.core.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.identity.stores\\10.0.7\\microsoft.extensions.identity.stores.10.0.7.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\microsoft.extensions.logging\\10.0.7\\microsoft.extensions.logging.10.0.7.nupkg.sha512",

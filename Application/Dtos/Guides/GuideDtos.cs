@@ -2,30 +2,30 @@ namespace Application.Dtos.Guides
 {
     public class CreateGuideRequest
     {
-        public string FullName { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string Nationality { get; set; } = string.Empty;
-        public string Languages { get; set; } = string.Empty;
-        public string Specialization { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
-        public string Bio { get; set; } = string.Empty;
+        public string? FullName { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public string? Description { get; set; }
+        public string? Nationality { get; set; }
+        public string? Languages { get; set; }
+        public string? Specialization { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Bio { get; set; }
         public decimal PricePerDay { get; set; }
     }
 
     public class GuideResponse
     {
         public Guid Id { get; set; }
-        public string FullName { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string Nationality { get; set; } = string.Empty;
-        public string Languages { get; set; } = string.Empty;
-        public string Specialization { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
-        public string Bio { get; set; } = string.Empty;
+        public string? FullName { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public string? Description { get; set; }
+        public string? Nationality { get; set; }
+        public string? Languages { get; set; }
+        public string? Specialization { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Bio { get; set; }
         public decimal PricePerDay { get; set; }
         public decimal Rating { get; set; }
         public int ReviewCount { get; set; }
@@ -37,19 +37,19 @@ namespace Application.Dtos.Guides
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int NumberOfPeople { get; set; }
-        public string SpecialRequests { get; set; } = string.Empty;
+        public string? SpecialRequests { get; set; }
     }
 
     public class GuideBookingResponse
     {
         public Guid Id { get; set; }
         public Guid GuideId { get; set; }
-        public string GuideName { get; set; } = string.Empty;
+        public string? GuideName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int NumberOfPeople { get; set; }
         public int NumberOfDays { get; set; }
         public decimal TotalPrice { get; set; }
-        public string Status { get; set; } = string.Empty;
+        public string? Status { get; set; }
     }
 }

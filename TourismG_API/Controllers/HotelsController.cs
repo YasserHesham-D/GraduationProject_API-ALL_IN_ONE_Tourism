@@ -3,6 +3,10 @@ using Application.Services.HotelServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Presentation.Services;
+using Application.Dtos.Common;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.DbContext;
 
 namespace Presentation.Controllers
 {
@@ -12,11 +16,15 @@ namespace Presentation.Controllers
     {
         private readonly IHotelService _hotelService;
         private readonly ILogger<HotelsController> _logger;
+        private readonly AppDbContext _context;
+        private readonly IFileUploadService _fileUploadService;
 
-        public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger)
+        public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger, AppDbContext context, IFileUploadService fileUploadService)
         {
             _hotelService = hotelService;
             _logger = logger;
+            _context = context;
+            _fileUploadService = fileUploadService;
         }
 
         /// <summary>
@@ -78,6 +86,46 @@ namespace Presentation.Controllers
             {
                 _logger.LogError($"Error booking hotel: {ex.Message}");
                 return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost("{id:guid}/upload-photo")]
+        [Authorize]
+        public async Task<IActionResult> UploadHotelPhoto(Guid id, [FromForm] UploadPhotoRequest request)
+        {
+            var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id);
+            if (hotel == null)
+            {
+                return NotFound("Hotel not found");
+            }
+
+            if (request.Photo is null || request.Photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            try
+            {
+                if (!_fileUploadService.ValidateFile(request.Photo))
+                {
+                    return BadRequest("Invalid file. Allowed formats: JPG, PNG, WEBP, GIF, BMP. Max size: 5 MB");
+                }
+
+                var photoUrl = await _fileUploadService.UploadFileAsync(request.Photo, "uploads");
+
+                if (!string.IsNullOrEmpty(hotel.ImageUrl))
+                {
+                    _fileUploadService.DeleteFile(hotel.ImageUrl);
+                }
+
+                hotel.ImageUrl = photoUrl;
+                await _context.SaveChangesAsync();
+
+                return Ok(new UploadPhotoResponse(true, photoUrl));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
             }
         }
     }

@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using Presentation.ServiceExtensions;
-//using Microsoft.OpenApi.Models;          
+using Presentation.Services;
+//using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.ServicesCollection();
+
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 builder.Services.AddControllers();
 
@@ -77,7 +80,10 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// ✅ Correct order
+// Static files middleware for serving uploaded files
+app.UseStaticFiles();
+
+// CORS Middleware
 app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
@@ -93,14 +99,51 @@ app.UseSwaggerUI(options =>
 });
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
+// File serving endpoint
+app.MapGet("/api/files/{*filePath}", async (string filePath, IWebHostEnvironment env) =>
+{
+    try
+    {
+        var combinedPath = Path.Combine(env.WebRootPath ?? "wwwroot", filePath ?? string.Empty);
+
+        // Security: prevent path traversal
+        var fullPath_normalized = Path.GetFullPath(combinedPath);
+        var webroot_normalized = Path.GetFullPath(env.WebRootPath ?? "wwwroot");
+        if (!fullPath_normalized.StartsWith(webroot_normalized, StringComparison.OrdinalIgnoreCase))
+        {
+            return Results.Forbid();
+        }
+
+        if (!System.IO.File.Exists(fullPath_normalized))
+            return Results.NotFound();
+
+        var bytes = await System.IO.File.ReadAllBytesAsync(fullPath_normalized);
+        var contentType = GetContentType(fullPath_normalized);
+        return Results.File(bytes, contentType);
+    }
+    catch
+    {
+        return Results.NotFound();
+    }
+});
+
 app.MapControllers();
 
-
-
-// using (var scope = app.Services.CreateScope())
-// {
-//     var seedService = scope.ServiceProvider.GetRequiredService<SeedDataService>();
-//     await seedService.InitializeAsync();
-// }
-
 app.Run();
+
+// Helper method to determine content type
+string GetContentType(string filePath)
+{
+    var ext = Path.GetExtension(filePath).ToLowerInvariant();
+    return ext switch
+    {
+        ".jpg" or ".jpeg" => "image/jpeg",
+        ".png" => "image/png",
+        ".gif" => "image/gif",
+        ".webp" => "image/webp",
+        ".bmp" => "image/bmp",
+        ".tiff" => "image/tiff",
+        ".ico" => "image/x-icon",
+        _ => "application/octet-stream"
+    };
+}

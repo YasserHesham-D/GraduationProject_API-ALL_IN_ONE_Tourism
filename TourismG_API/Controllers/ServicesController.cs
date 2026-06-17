@@ -44,10 +44,10 @@ namespace Presentation.Controllers
                     s.Description,
                     s.Price,
                     s.Currency,
-                    s.Duration,
+                    s.StartDateTime,
+                    s.EndDateTime,
                     s.LocationName,
                     s.ImageUrl,
-                    s.Availability,
                     s.Rating,
                     s.BookingCount,
                     s.PlaceId,
@@ -70,10 +70,10 @@ namespace Presentation.Controllers
                     s.Description,
                     s.Price,
                     s.Currency,
-                    s.Duration,
+                    s.StartDateTime,
+                    s.EndDateTime,
                     s.LocationName,
                     s.ImageUrl,
-                    s.Availability,
                     s.Rating,
                     s.BookingCount,
                     s.PlaceId,
@@ -117,7 +117,7 @@ namespace Presentation.Controllers
         }
     }
 
-    public record ServiceDetailsDto(Guid Id, string Title, string Category, string Description, decimal Price, string Currency, string Duration, string LocationName, string ImageUrl, string Availability, decimal Rating, int BookingCount, Guid? PlaceId, string? PlaceName);
+    public record ServiceDetailsDto(Guid Id, string Title, string Category, string Description, decimal Price, string Currency, DateTime StartDateTime, DateTime EndDateTime, string LocationName, string ImageUrl, decimal Rating, int BookingCount, Guid? PlaceId, string? PlaceName);
     public record CreateBookingRequest(DateTime BookingDate, int Guests);
     public record BookingDto(Guid Id, string ServiceTitle, DateTime BookingDate, int Guests, decimal TotalPrice, string Status);
 }

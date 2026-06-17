@@ -2,30 +2,30 @@ namespace Application.Dtos.ProviderManagement
 {
     public class CreateProviderRequestDto
     {
-        public string BusinessName { get; set; } = string.Empty;
-        public string BusinessType { get; set; } = string.Empty; // Hotel, Transport, Guide, Program
-        public string BusinessDescription { get; set; } = string.Empty;
-        public string ContactNumber { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string TaxNumber { get; set; } = string.Empty;
-        public string RegistrationNumber { get; set; } = string.Empty;
-        public string DocumentUrl { get; set; } = string.Empty;
+        public string? BusinessName { get; set; }
+        public string? BusinessType { get; set; } // Hotel, Transport, Guide, Program
+        public string? BusinessDescription { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? Email { get; set; }
+        public string? TaxNumber { get; set; }
+        public string? RegistrationNumber { get; set; }
+        public string? DocumentUrl { get; set; }
     }
 
     public class ProviderRequestResponse
     {
-        public Guid Id { get; set; }
-        public string BusinessName { get; set; } = string.Empty;
-        public string BusinessType { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
-        public DateTime SubmittedAt { get; set; }
+        public Guid? Id { get; set; }
+        public string? BusinessName { get; set; }
+        public string? BusinessType { get; set; }
+        public string? Status { get; set; }
+        public DateTime? SubmittedAt { get; set; }
         public DateTime? ReviewedAt { get; set; }
         public string? RejectionReason { get; set; }
     }
 
     public class ProviderEarningsResponse
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public decimal TotalEarnings { get; set; }
         public decimal PendingEarnings { get; set; }
         public decimal WithdrawnAmount { get; set; }
@@ -35,23 +35,23 @@ namespace Application.Dtos.ProviderManagement
 
     public class ApproveProviderRequestDto
     {
-        public Guid RequestId { get; set; }
+        public Guid? RequestId { get; set; }
     }
 
     public class RejectProviderRequestDto
     {
-        public Guid RequestId { get; set; }
-        public string RejectionReason { get; set; } = string.Empty;
+        public Guid? RequestId { get; set; }
+        public string? RejectionReason { get; set; }
     }
 
     public class ProviderBookingActionDto
     {
-        public Guid BookingId { get; set; }
+        public Guid? BookingId { get; set; }
     }
 
     public class ProviderContactRequestDto
     {
-        public Guid BookingId { get; set; }
-        public string Message { get; set; } = string.Empty;
+        public Guid? BookingId { get; set; }
+        public string? Message { get; set; }
     }
 }

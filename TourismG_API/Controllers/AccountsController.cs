@@ -16,7 +16,48 @@ namespace Presentation.Controllers
     [ApiController]
     public class AccountsController(UserManager<User> userManager ,IAccountServices accountService,SignInManager<User> signInManager) : ControllerBase
     {
-        // sign up : any user register as customer then ask admin for being service provider from settings
+       
+        [HttpPost]
+        [Route("[Action]")]
+        public async Task<IActionResult> SignIn([FromBody] SignInRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid Request");
+
+            var user = await userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                return BadRequest("Email And Password Required");
+
+            var role = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+
+            var passwordValid = await signInManager.CheckPasswordSignInAsync(
+                user,
+                request.Password,
+                lockoutOnFailure: true
+            );
+
+            if (!passwordValid.Succeeded)
+            {
+                if (passwordValid.IsLockedOut)
+                    return Unauthorized("Account temporarily locked due to multiple failed login attempts.");
+
+                return BadRequest("Invalid Email Or Password");
+            }
+
+            var Tokens = await accountService.SignInAsync(user);
+
+            if (Tokens.Message == "success")
+                return Ok(new
+                {
+                    Tokens,
+                    user.Email,
+                    user.UserName,
+                    role
+
+                });
+
+            return StatusCode(500, "ServerError");
+        }
 
         [HttpPost]
         [Route("[Action]")]
@@ -53,47 +94,7 @@ namespace Presentation.Controllers
             return Ok(Accesstoken);
         }
 
-        [HttpPost]
-        [Route("[Action]")]
-        public async Task<IActionResult> SignIn([FromBody] SignInRequest request)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid Request");
-
-            var user = await userManager.FindByEmailAsync(request.Email);
-            if (user == null)
-                return BadRequest("Email And Password Required");
-
-            var role = userManager.GetRolesAsync(user).Result.FirstOrDefault();
-
-            var passwordValid = await signInManager.CheckPasswordSignInAsync(
-                user,
-                request.Password,
-                lockoutOnFailure: true
-            );
-
-            if (!passwordValid.Succeeded)
-            {
-                if (passwordValid.IsLockedOut)
-                    return Unauthorized("Account temporarily locked due to multiple failed login attempts.");
-
-                return BadRequest("Invalid Email Or Password");
-            }
-
-            var Tokens = await accountService.SignInAsync(user);
-
-            if (Tokens.Message == "success") 
-            return Ok(new
-            {
-                Tokens,
-                user.Email,
-                user.UserName,
-                role
-
-            });
-
-            return StatusCode(500, "ServerError");
-        }
+       
 
         [HttpGet]
         [Route("[Action]")]

@@ -2,6 +2,7 @@ using Application.Dtos.ProviderManagement;
 using Application.Services.ProviderServices;
 using Domain.Interfaces.IModelsRepo;
 using Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services
@@ -14,6 +15,7 @@ namespace Application.Services
         private readonly ITransportBookingRepo _transportBookingRepo;
         private readonly IProgramBookingRepo _programBookingRepo;
         private readonly IGuideBookingRepo _guideBookingRepo;
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<ProviderService> _logger;
 
         public ProviderService(
@@ -23,6 +25,7 @@ namespace Application.Services
             ITransportBookingRepo transportBookingRepo,
             IProgramBookingRepo programBookingRepo,
             IGuideBookingRepo guideBookingRepo,
+            UserManager<User> userManager,
             ILogger<ProviderService> logger)
         {
             _providerRequestRepo = providerRequestRepo;
@@ -31,6 +34,7 @@ namespace Application.Services
             _transportBookingRepo = transportBookingRepo;
             _programBookingRepo = programBookingRepo;
             _guideBookingRepo = guideBookingRepo;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -86,6 +90,24 @@ namespace Application.Services
 
             await _providerRequestRepo.UpdateAsync(request);
             await _providerRequestRepo.SaveChangesAsync();
+
+            // Get the user and add Provider role
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user != null)
+            {
+                
+                var result = await _userManager.AddToRoleAsync(user, "Provider");
+                if (!result.Succeeded)
+                {
+                    _logger.LogError($"Failed to add Provider role to user {request.UserId}");
+                    throw new Exception($"Failed to assign Provider role: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
+                _logger.LogInformation($"Successfully added Provider role to user {request.UserId}");
+            }
+            else
+            {
+                throw new Exception($"User {request.UserId} not found");
+            }
 
             // Create earnings record for provider
             var earnings = new ProviderEarnings

@@ -2,37 +2,37 @@ namespace Application.Dtos.Hotels
 {
     public class CreateHotelRequest
     {
-        public string Name { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public string Country { get; set; } = "Egypt";
-        public string Description { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? Name { get; set; }
+        public string? Location { get; set; }
+        public string? City { get; set; }
+        public string? Country { get; set; }
+        public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
         public int StarRating { get; set; }
         public decimal PricePerNight { get; set; }
         public int AvailableRooms { get; set; }
-        public string Amenities { get; set; } = string.Empty;
-        public string ContactNumber { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public string? Amenities { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? Email { get; set; }
     }
 
     public class HotelResponse
     {
         public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Location { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public string Country { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? Name { get; set; }
+        public string? Location { get; set; }
+        public string? City { get; set; }
+        public string? Country { get; set; }
+        public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
         public int StarRating { get; set; }
         public decimal PricePerNight { get; set; }
         public decimal Rating { get; set; }
         public int ReviewCount { get; set; }
         public int AvailableRooms { get; set; }
-        public string Amenities { get; set; } = string.Empty;
-        public string ContactNumber { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public string? Amenities { get; set; }
+        public string? ContactNumber { get; set; }
+        public string? Email { get; set; }
     }
 
     public class BookHotelRequest
@@ -41,19 +41,19 @@ namespace Application.Dtos.Hotels
         public DateTime CheckOutDate { get; set; }
         public int NumberOfRooms { get; set; }
         public int NumberOfGuests { get; set; }
-        public string SpecialRequests { get; set; } = string.Empty;
+        public string? SpecialRequests { get; set; }
     }
 
     public class HotelBookingResponse
     {
         public Guid Id { get; set; }
         public Guid HotelId { get; set; }
-        public string HotelName { get; set; } = string.Empty;
+        public string? HotelName { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         public int NumberOfRooms { get; set; }
         public int NumberOfGuests { get; set; }
         public decimal TotalPrice { get; set; }
-        public string Status { get; set; } = string.Empty;
+        public string? Status { get; set; }
     }
 }

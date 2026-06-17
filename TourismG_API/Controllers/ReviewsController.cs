@@ -1,7 +1,10 @@
 using System.Security.Claims;
+using Application.Dtos.Common;
+using Presentation.Services;
 using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +12,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController(AppDbContext context) : ControllerBase
+    public class ReviewsController(AppDbContext context, IFileUploadService fileUploadService) : ControllerBase
     {
         [HttpGet("places/{placeId:guid}")]
         public async Task<IActionResult> GetPlaceReviews(Guid placeId)
@@ -146,6 +149,49 @@ namespace Presentation.Controllers
 
             place.Rating = Math.Round((decimal)ratings.Average(), 2);
             place.ReviewCount = ratings.Count;
+        }
+
+        [HttpPost("{reviewId:guid}/upload-photo")]
+        [Authorize]
+        public async Task<IActionResult> UploadReviewPhoto(Guid reviewId, [FromForm] UploadPhotoRequest request)
+        {
+            var userId = GetUserId();
+            var review = await context.PlaceReviews.FirstOrDefaultAsync(r => r.Id == reviewId && r.UserId == userId);
+
+            if (review is null)
+            {
+                return Unauthorized("Not your review");
+            }
+
+            if (request.Photo is null || request.Photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            try
+            {
+                if (!fileUploadService.ValidateFile(request.Photo))
+                {
+                    return BadRequest("Invalid file. Allowed formats: JPG, PNG, WEBP, GIF, BMP. Max size: 5 MB");
+                }
+
+                var photoUrl = await fileUploadService.UploadFileAsync(request.Photo, "uploads");
+
+                // Delete old photo if it exists
+                if (!string.IsNullOrEmpty(review.PhotoUrl))
+                {
+                    fileUploadService.DeleteFile(review.PhotoUrl);
+                }
+
+                review.PhotoUrl = photoUrl;
+                await context.SaveChangesAsync();
+
+                return Ok(new UploadPhotoResponse(true, photoUrl));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
+            }
         }
 
         private string GetUserId()

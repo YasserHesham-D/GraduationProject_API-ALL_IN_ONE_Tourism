@@ -18,7 +18,7 @@ namespace Presentation.Controllers
 
             var serviceBookings = await context.Bookings
                 .AsNoTracking()
-                .Where(b => b.UserId == userId)
+                .Where(b => b.UserId == userId).Where(x => x.Status != "cancelled")
                 .Select(b => new CustomerBookingItem(
                     b.Id,
                     "service",
@@ -36,7 +36,7 @@ namespace Presentation.Controllers
 
             var hotelBookings = await context.HotelBookings
                 .AsNoTracking()
-                .Where(h => h.UserId == userId)
+                .Where(h => h.UserId == userId).Where(x => x.Status != "cancelled")
                 .Select(h => new CustomerBookingItem(
                     h.Id,
                     "hotel",
@@ -54,7 +54,7 @@ namespace Presentation.Controllers
 
             var transportBookings = await context.TransportBookings
                 .AsNoTracking()
-                .Where(t => t.UserId == userId)
+                .Where(t => t.UserId == userId).Where(x => x.Status != "cancelled")
                 .Select(t => new CustomerBookingItem(
                     t.Id,
                     "transport",
@@ -72,7 +72,7 @@ namespace Presentation.Controllers
 
             var programBookings = await context.ProgramBookings
                 .AsNoTracking()
-                .Where(p => p.UserId == userId)
+                .Where(p => p.UserId == userId).Where(x => x.Status != "cancelled")
                 .Select(p => new CustomerBookingItem(
                     p.Id,
                     "program",
@@ -90,7 +90,7 @@ namespace Presentation.Controllers
 
             var guideBookings = await context.GuideBookings
                 .AsNoTracking()
-                .Where(g => g.UserId == userId)
+                .Where(g => g.UserId == userId).Where(x => x.Status != "cancelled")
                 .Select(g => new CustomerBookingItem(
                     g.Id,
                     "guide",

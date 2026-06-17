@@ -1,9 +1,12 @@
 using System.Security.Claims;
 using Application.Dtos.ProviderManagement;
+using Application.Dtos.Common;
+using Presentation.Services;
 using Application.Services.ProviderServices;
 using Domain.Models;
 using Infrastructure.DbContext;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +19,13 @@ namespace Presentation.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IProviderService _providerService;
+        private readonly IFileUploadService _fileUploadService;
 
-        public ProviderController(AppDbContext context, IProviderService providerService)
+        public ProviderController(AppDbContext context, IProviderService providerService, IFileUploadService fileUploadService)
         {
             _context = context;
             _providerService = providerService;
+            _fileUploadService = fileUploadService;
         }
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
@@ -71,10 +76,10 @@ namespace Presentation.Controllers
                     s.Description,
                     s.Price,
                     s.Currency,
-                    s.Duration,
+                    s.StartDateTime,
+                    s.EndDateTime,
                     s.LocationName,
                     s.ImageUrl,
-                    s.Availability,
                     s.Rating,
                     s.BookingCount,
                     s.IsActive,
@@ -98,10 +103,10 @@ namespace Presentation.Controllers
                     s.Description,
                     s.Price,
                     s.Currency,
-                    s.Duration,
+                    s.StartDateTime,
+                    s.EndDateTime,
                     s.LocationName,
                     s.ImageUrl,
-                    s.Availability,
                     s.Rating,
                     s.BookingCount,
                     s.IsActive,
@@ -124,6 +129,11 @@ namespace Presentation.Controllers
                 return BadRequest("Price cannot be negative.");
             }
 
+            if (request.StartDateTime >= request.EndDateTime)
+            {
+                return BadRequest("Start date/time must be before end date/time.");
+            }
+
             if (request.PlaceId.HasValue && !await _context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
             {
                 return BadRequest("Place not found.");
@@ -138,10 +148,10 @@ namespace Presentation.Controllers
                 Description = request.Description,
                 Price = request.Price,
                 Currency = string.IsNullOrWhiteSpace(request.Currency) ? "EGP" : request.Currency,
-                Duration = request.Duration,
+                StartDateTime = request.StartDateTime,
+                EndDateTime = request.EndDateTime,
                 LocationName = request.LocationName,
                 ImageUrl = request.ImageUrl,
-                Availability = request.Availability,
                 Rating = request.Rating,
                 IsActive = request.IsActive ?? true
             };
@@ -149,7 +159,7 @@ namespace Presentation.Controllers
             await _context.ServiceOfferings.AddAsync(service);
             await _context.SaveChangesAsync();
 
-            return Ok("Service Added Success");
+            return CreatedAtAction(nameof(GetMyService), new { id = service.Id }, service.Id);
         }
 
         [HttpPut("services/{id:guid}")]
@@ -159,7 +169,12 @@ namespace Presentation.Controllers
             var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
-                return Unauthorized("Not Your Servcie");
+                return Unauthorized("Not your service");
+            }
+
+            if (request.StartDateTime >= request.EndDateTime)
+            {
+                return BadRequest("Start date/time must be before end date/time.");
             }
 
             if (request.PlaceId.HasValue && !await _context.Places.AnyAsync(p => p.Id == request.PlaceId.Value))
@@ -173,15 +188,15 @@ namespace Presentation.Controllers
             service.Description = request.Description;
             service.Price = request.Price;
             service.Currency = string.IsNullOrWhiteSpace(request.Currency) ? "EGP" : request.Currency;
-            service.Duration = request.Duration;
+            service.StartDateTime = request.StartDateTime;
+            service.EndDateTime = request.EndDateTime;
             service.LocationName = request.LocationName;
             service.ImageUrl = request.ImageUrl;
-            service.Availability = request.Availability;
             service.Rating = request.Rating;
             service.IsActive = request.IsActive ?? service.IsActive;
 
             await _context.SaveChangesAsync();
-            return Ok("Service UPdated SUccess");
+            return NoContent();
         }
 
         [HttpDelete("services/{id:guid}")]
@@ -191,13 +206,56 @@ namespace Presentation.Controllers
             var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
             if (service is null)
             {
-                return Unauthorized("ITS Not your Service to delete  it");
+                return Unauthorized("Not your service to delete");
             }
 
             _context.ServiceOfferings.Remove(service);
             await _context.SaveChangesAsync();
 
-            return Ok("Service Deleted Success");
+            return NoContent();
+        }
+
+        [HttpPost("services/{id:guid}/upload-photo")]
+        public async Task<IActionResult> UploadServicePhoto(Guid id, [FromForm] UploadPhotoRequest request)
+        {
+            var providerId = GetUserId();
+            var service = await _context.ServiceOfferings.FirstOrDefaultAsync(s => s.Id == id && s.ProviderId == providerId);
+
+            if (service is null)
+            {
+                return Unauthorized("Not your service");
+            }
+
+            if (request.Photo is null || request.Photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            try
+            {
+                if (!_fileUploadService.ValidateFile(request.Photo))
+                {
+                    return BadRequest("Invalid file. Allowed formats: JPG, PNG, WEBP, GIF, BMP. Max size: 5 MB");
+                }
+
+                var photoUrl = await _fileUploadService.UploadFileAsync(request.Photo, "uploads");
+
+                // Delete old image if it exists
+                if (!string.IsNullOrEmpty(service.ImageUrl))
+                {
+                    _fileUploadService.DeleteFile(service.ImageUrl);
+                }
+
+                service.ImageUrl = photoUrl;
+                service.UpdatedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+
+                return Ok(new UploadPhotoResponse(true, photoUrl));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
+            }
         }
 
         [HttpGet("bookings")]
@@ -312,6 +370,47 @@ namespace Presentation.Controllers
             }
         }
 
+        [HttpPost("places/{id:guid}/upload-photo")]
+        public async Task<IActionResult> UploadPlacePhoto(Guid id, [FromForm] UploadPhotoRequest? request)
+        {
+            var place = await _context.Places.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (place is null)
+            {
+                return NotFound("Place not found");
+            }
+
+            if (request.Photo is null || request.Photo.Length == 0)
+            {
+                return BadRequest("No file provided");
+            }
+
+            try
+            {
+                if (!_fileUploadService.ValidateFile(request.Photo))
+                {
+                    return BadRequest("Invalid file. Allowed formats: JPG, PNG, WEBP, GIF, BMP. Max size: 5 MB");
+                }
+
+                var photoUrl = await _fileUploadService.UploadFileAsync(request.Photo, "uploads");
+
+                // Delete old image if it exists
+                if (!string.IsNullOrEmpty(place.ImageUrl))
+                {
+                    _fileUploadService.DeleteFile(place.ImageUrl);
+                }
+
+                place.ImageUrl = photoUrl;
+                await _context.SaveChangesAsync();
+
+                return Ok(new UploadPhotoResponse(true, photoUrl));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
+            }
+        }
+
         [HttpPut("bookings/{id:guid}/decline")]
         public async Task<IActionResult> DeclineBooking(Guid id)
         {
@@ -349,7 +448,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("bookings/{id:guid}/contact")]
-        public async Task<IActionResult> ContactUserForBooking(Guid id, [FromBody] ProviderContactRequestDto request)
+        public async Task<IActionResult> ContactUserForBooking(Guid id, [FromBody] ProviderContactRequestDto? request)
         {
             try
             {
@@ -377,8 +476,8 @@ namespace Presentation.Controllers
 
     public record ProviderDashboard(decimal TotalEarnings, int TotalBookings, int ThisMonthBookings, decimal Rating, IReadOnlyCollection<ProviderBookingItem> RecentBookings);
     public record ProviderBookingItem(Guid Id, string ServiceTitle, string CustomerName, DateTime BookingDate, int Guests, decimal TotalPrice, string Status);
-    public record ProviderServiceItem(Guid Id, string Title, string Category, string Description, decimal Price, string Currency, string Duration, string LocationName, string ImageUrl, string Availability, decimal Rating, int BookingCount, bool IsActive, Guid? PlaceId);
+    public record ProviderServiceItem(Guid Id, string Title, string Category, string Description, decimal Price, string Currency, DateTime StartDateTime, DateTime EndDateTime, string LocationName, string ImageUrl, decimal Rating, int BookingCount, bool IsActive, Guid? PlaceId);
     public record ProviderPlaceItem(Guid Id, string Name, string Category, string City, string Country, string LocationName, string Description, string ImageUrl, string OpeningHours, decimal Rating, int ReviewCount, decimal? PriceFrom, decimal? DistanceKm, decimal? Latitude, decimal? Longitude, bool IsRecommended, bool IsPopular);
-    public record UpsertServiceRequest(Guid? PlaceId, string Title, string Category, string Description, decimal Price, string? Currency, string Duration, string LocationName, string ImageUrl, string Availability, decimal Rating, bool? IsActive);
+    public record UpsertServiceRequest(Guid? PlaceId, string? Title, string? Category, string? Description, decimal Price, string? Currency, DateTime StartDateTime, DateTime EndDateTime, string LocationName, string ImageUrl, decimal Rating, bool? IsActive);
     public record UpdateBookingStatusRequest(string Status);
-  }
+}

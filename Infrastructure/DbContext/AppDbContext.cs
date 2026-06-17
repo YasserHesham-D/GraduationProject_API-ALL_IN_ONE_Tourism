@@ -67,10 +67,10 @@ namespace Infrastructure.DbContext
                 entity.Property(s => s.Title).HasMaxLength(180).IsRequired();
                 entity.Property(s => s.Category).HasMaxLength(80).IsRequired();
                 entity.Property(s => s.Currency).HasMaxLength(12).IsRequired();
-                entity.Property(s => s.Duration).HasMaxLength(80);
+                entity.Property(s => s.StartDateTime).IsRequired();
+                entity.Property(s => s.EndDateTime).IsRequired();
                 entity.Property(s => s.LocationName).HasMaxLength(180);
                 entity.Property(s => s.ImageUrl).HasMaxLength(500);
-                entity.Property(s => s.Availability).HasMaxLength(160);
                 entity.Property(s => s.Price).HasPrecision(18, 2);
                 entity.Property(s => s.Rating).HasPrecision(3, 2);
                 entity.HasOne(s => s.Provider)

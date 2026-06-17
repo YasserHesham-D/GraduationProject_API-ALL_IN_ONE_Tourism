@@ -7,8 +7,8 @@ namespace Application.Dtos.SignIn
 {
     public class SignInResponse
     {
-        public string Token { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty; 
-        
+        public string? Token { get; set; }
+        public string? Message { get; set; }
+
     }
 }
