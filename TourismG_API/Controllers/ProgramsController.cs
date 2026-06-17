@@ -31,7 +31,7 @@ namespace Presentation.Controllers
         /// Get all programs
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetPrograms()
+        public async Task<IActionResult> GetAllPrograms()
         {
             try
             {
@@ -127,6 +127,126 @@ namespace Presentation.Controllers
             {
                 return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
             }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateProgram([FromBody] CreateProgramRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(providerId))
+                return Unauthorized();
+
+            var program = new Domain.Models.Program
+            {
+                ProviderId = providerId,
+                Name = request.Name ?? string.Empty,
+                Description = request.Description ?? string.Empty,
+                ImageUrl = request.ImageUrl ?? string.Empty,
+                Category = request.Category ?? string.Empty,
+                Location = request.Location ?? string.Empty,
+                City = request.City ?? string.Empty,
+                Country = request.Country ?? "Egypt",
+                Price = request.Price,
+                Duration = request.Duration,
+                MaxParticipants = request.MaxParticipants,
+                AvailableSpots = request.MaxParticipants,
+                IncludedServices = request.IncludedServices ?? string.Empty,
+                StartDate = request.StartDate,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _context.Programs.AddAsync(program);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetProgramById), new { id = program.Id }, program.Id);
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateProgram(Guid id, [FromBody] CreateProgramRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var program = await _context.Programs.FirstOrDefaultAsync(p => p.Id == id && p.ProviderId == providerId);
+            if (program is null)
+                return Unauthorized("Not your program or not found");
+
+            program.Name = request.Name ?? program.Name;
+            program.Description = request.Description ?? program.Description;
+            program.ImageUrl = request.ImageUrl ?? program.ImageUrl;
+            program.Category = request.Category ?? program.Category;
+            program.Location = request.Location ?? program.Location;
+            program.City = request.City ?? program.City;
+            program.Country = request.Country ?? program.Country;
+            program.Price = request.Price;
+            program.Duration = request.Duration;
+            program.MaxParticipants = request.MaxParticipants;
+            program.AvailableSpots = request.MaxParticipants;
+            program.IncludedServices = request.IncludedServices ?? program.IncludedServices;
+            program.StartDate = request.StartDate;
+            program.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteProgram(Guid id)
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var program = await _context.Programs.FirstOrDefaultAsync(p => p.Id == id && p.ProviderId == providerId);
+            if (program is null)
+                return Unauthorized("Not your program or not found");
+
+            if (!string.IsNullOrEmpty(program.ImageUrl))
+            {
+                _fileUploadService.DeleteFile(program.ImageUrl);
+            }
+
+            _context.Programs.Remove(program);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<IActionResult> GetMyPrograms()
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var programs = await _context.Programs
+                .AsNoTracking()
+                .Where(p => p.ProviderId == providerId)
+                .OrderByDescending(p => p.CreatedAt)
+                .Select(p => new Application.Dtos.Programs.ProgramResponse
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    Category = p.Category,
+                    Location = p.Location,
+                    City = p.City,
+                    Country = p.Country,
+                    Price = p.Price,
+                    Duration = p.Duration,
+                    MaxParticipants = p.MaxParticipants,
+                    AvailableSpots = p.AvailableSpots,
+                    IncludedServices = p.IncludedServices,
+                    Rating = p.Rating,
+                    ReviewCount = p.ReviewCount,
+                    StartDate = p.StartDate
+                })
+                .ToListAsync();
+
+            return Ok(programs);
         }
     }
 }

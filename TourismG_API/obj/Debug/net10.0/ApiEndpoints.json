@@ -248,9 +248,62 @@
   },
   {
     "ContainingType": "Presentation.Controllers.GuidesController",
+    "Method": "CreateGuide",
+    "RelativePath": "api/Guides",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Guides.CreateGuideRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.GuidesController",
     "Method": "GetGuideById",
     "RelativePath": "api/Guides/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.GuidesController",
+    "Method": "UpdateGuide",
+    "RelativePath": "api/Guides/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Guides.CreateGuideRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.GuidesController",
+    "Method": "DeleteGuide",
+    "RelativePath": "api/Guides/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -305,6 +358,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Presentation.Controllers.GuidesController",
+    "Method": "GetMyGuides",
+    "RelativePath": "api/Guides/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Presentation.Controllers.HotelsController",
     "Method": "GetHotels",
     "RelativePath": "api/Hotels",
@@ -316,9 +379,62 @@
   },
   {
     "ContainingType": "Presentation.Controllers.HotelsController",
+    "Method": "CreateHotel",
+    "RelativePath": "api/Hotels",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Hotels.CreateHotelRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.HotelsController",
     "Method": "GetHotelById",
     "RelativePath": "api/Hotels/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.HotelsController",
+    "Method": "UpdateHotel",
+    "RelativePath": "api/Hotels/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Hotels.CreateHotelRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.HotelsController",
+    "Method": "DeleteHotel",
+    "RelativePath": "api/Hotels/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -370,6 +486,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.HotelsController",
+    "Method": "GetMyHotels",
+    "RelativePath": "api/Hotels/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -556,7 +682,7 @@
   },
   {
     "ContainingType": "Presentation.Controllers.ProgramsController",
-    "Method": "GetPrograms",
+    "Method": "GetAllPrograms",
     "RelativePath": "api/Programs",
     "HttpMethod": "GET",
     "IsController": true,
@@ -566,9 +692,62 @@
   },
   {
     "ContainingType": "Presentation.Controllers.ProgramsController",
+    "Method": "CreateProgram",
+    "RelativePath": "api/Programs",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Programs.CreateProgramRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ProgramsController",
     "Method": "GetProgramById",
     "RelativePath": "api/Programs/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ProgramsController",
+    "Method": "UpdateProgram",
+    "RelativePath": "api/Programs/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Programs.CreateProgramRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ProgramsController",
+    "Method": "DeleteProgram",
+    "RelativePath": "api/Programs/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -620,6 +799,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ProgramsController",
+    "Method": "GetMyPrograms",
+    "RelativePath": "api/Programs/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -1085,9 +1274,62 @@
   },
   {
     "ContainingType": "Presentation.Controllers.TransportController",
+    "Method": "CreateTransport",
+    "RelativePath": "api/Transport",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Transport.CreateTransportRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.TransportController",
     "Method": "GetTransportById",
     "RelativePath": "api/Transport/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.TransportController",
+    "Method": "UpdateTransport",
+    "RelativePath": "api/Transport/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Application.Dtos.Transport.CreateTransportRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.TransportController",
+    "Method": "DeleteTransport",
+    "RelativePath": "api/Transport/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -1139,6 +1381,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.TransportController",
+    "Method": "GetMyTransports",
+    "RelativePath": "api/Transport/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

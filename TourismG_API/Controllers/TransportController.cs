@@ -128,5 +128,119 @@ namespace Presentation.Controllers
                 return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateTransport([FromBody] CreateTransportRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(providerId))
+                return Unauthorized();
+
+            var transport = new Domain.Models.Transport
+            {
+                ProviderId = providerId,
+                Name = request.Name ?? string.Empty,
+                Type = request.Type ?? string.Empty,
+                Description = request.Description ?? string.Empty,
+                ImageUrl = request.ImageUrl ?? string.Empty,
+                DepartureLocation = request.DepartureLocation ?? string.Empty,
+                ArrivalLocation = request.ArrivalLocation ?? string.Empty,
+                DepartureTime = request.DepartureTime ?? string.Empty,
+                ArrivalTime = request.ArrivalTime ?? string.Empty,
+                Price = request.Price,
+                TotalCapacity = request.TotalCapacity,
+                AvailableSeats = request.TotalCapacity,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _context.Transports.AddAsync(transport);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTransportById), new { id = transport.Id }, transport.Id);
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateTransport(Guid id, [FromBody] CreateTransportRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var transport = await _context.Transports.FirstOrDefaultAsync(t => t.Id == id && t.ProviderId == providerId);
+            if (transport is null)
+                return Unauthorized("Not your transport or not found");
+
+            transport.Name = request.Name ?? transport.Name;
+            transport.Type = request.Type ?? transport.Type;
+            transport.Description = request.Description ?? transport.Description;
+            transport.ImageUrl = request.ImageUrl ?? transport.ImageUrl;
+            transport.DepartureLocation = request.DepartureLocation ?? transport.DepartureLocation;
+            transport.ArrivalLocation = request.ArrivalLocation ?? transport.ArrivalLocation;
+            transport.DepartureTime = request.DepartureTime ?? transport.DepartureTime;
+            transport.ArrivalTime = request.ArrivalTime ?? transport.ArrivalTime;
+            transport.Price = request.Price;
+            transport.TotalCapacity = request.TotalCapacity;
+            transport.AvailableSeats = request.TotalCapacity;
+            transport.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteTransport(Guid id)
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var transport = await _context.Transports.FirstOrDefaultAsync(t => t.Id == id && t.ProviderId == providerId);
+            if (transport is null)
+                return Unauthorized("Not your transport or not found");
+
+            if (!string.IsNullOrEmpty(transport.ImageUrl))
+            {
+                _fileUploadService.DeleteFile(transport.ImageUrl);
+            }
+
+            _context.Transports.Remove(transport);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<IActionResult> GetMyTransports()
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var transports = await _context.Transports
+                .AsNoTracking()
+                .Where(t => t.ProviderId == providerId)
+                .OrderByDescending(t => t.CreatedAt)
+                .Select(t => new Application.Dtos.Transport.TransportResponse
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Type = t.Type,
+                    Description = t.Description,
+                    ImageUrl = t.ImageUrl,
+                    DepartureLocation = t.DepartureLocation,
+                    ArrivalLocation = t.ArrivalLocation,
+                    DepartureTime = t.DepartureTime,
+                    ArrivalTime = t.ArrivalTime,
+                    Price = t.Price,
+                    AvailableSeats = t.AvailableSeats,
+                    TotalCapacity = t.TotalCapacity,
+                    Rating = t.Rating,
+                    ReviewCount = t.ReviewCount
+                })
+                .ToListAsync();
+
+            return Ok(transports);
+        }
     }
 }

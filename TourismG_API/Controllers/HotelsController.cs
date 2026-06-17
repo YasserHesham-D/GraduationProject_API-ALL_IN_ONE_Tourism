@@ -128,5 +128,122 @@ namespace Presentation.Controllers
                 return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateHotel([FromBody] CreateHotelRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(providerId))
+                return Unauthorized();
+
+            var hotel = new Domain.Models.Hotel
+            {
+                ProviderId = providerId,
+                Name = request.Name ?? string.Empty,
+                Location = request.Location ?? string.Empty,
+                City = request.City ?? string.Empty,
+                Country = request.Country ?? "Egypt",
+                Description = request.Description ?? string.Empty,
+                ImageUrl = request.ImageUrl ?? string.Empty,
+                StarRating = request.StarRating,
+                PricePerNight = request.PricePerNight,
+                AvailableRooms = request.AvailableRooms,
+                Amenities = request.Amenities ?? string.Empty,
+                ContactNumber = request.ContactNumber ?? string.Empty,
+                Email = request.Email ?? string.Empty,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _context.Hotels.AddAsync(hotel);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetHotelById), new { id = hotel.Id }, hotel.Id);
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateHotel(Guid id, [FromBody] CreateHotelRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id && h.ProviderId == providerId);
+            if (hotel is null)
+                return Unauthorized("Not your hotel or not found");
+
+            hotel.Name = request.Name ?? hotel.Name;
+            hotel.Location = request.Location ?? hotel.Location;
+            hotel.City = request.City ?? hotel.City;
+            hotel.Country = request.Country ?? hotel.Country;
+            hotel.Description = request.Description ?? hotel.Description;
+            hotel.ImageUrl = request.ImageUrl ?? hotel.ImageUrl;
+            hotel.StarRating = request.StarRating;
+            hotel.PricePerNight = request.PricePerNight;
+            hotel.AvailableRooms = request.AvailableRooms;
+            hotel.Amenities = request.Amenities ?? hotel.Amenities;
+            hotel.ContactNumber = request.ContactNumber ?? hotel.ContactNumber;
+            hotel.Email = request.Email ?? hotel.Email;
+            hotel.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteHotel(Guid id)
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var hotel = await _context.Hotels.FirstOrDefaultAsync(h => h.Id == id && h.ProviderId == providerId);
+            if (hotel is null)
+                return Unauthorized("Not your hotel or not found");
+
+            if (!string.IsNullOrEmpty(hotel.ImageUrl))
+            {
+                _fileUploadService.DeleteFile(hotel.ImageUrl);
+            }
+
+            _context.Hotels.Remove(hotel);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<IActionResult> GetMyHotels()
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var hotels = await _context.Hotels
+                .AsNoTracking()
+                .Where(h => h.ProviderId == providerId)
+                .OrderByDescending(h => h.CreatedAt)
+                .Select(h => new Application.Dtos.Hotels.HotelResponse
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    Location = h.Location,
+                    City = h.City,
+                    Country = h.Country,
+                    Description = h.Description,
+                    ImageUrl = h.ImageUrl,
+                    StarRating = h.StarRating,
+                    PricePerNight = h.PricePerNight,
+                    Rating = h.Rating,
+                    ReviewCount = h.ReviewCount,
+                    AvailableRooms = h.AvailableRooms,
+                    Amenities = h.Amenities,
+                    ContactNumber = h.ContactNumber,
+                    Email = h.Email
+                })
+                .ToListAsync();
+
+            return Ok(hotels);
+        }
     }
 }

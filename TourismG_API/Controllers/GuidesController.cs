@@ -128,5 +128,117 @@ namespace Presentation.Controllers
                 return StatusCode(500, new UploadPhotoResponse(false, null, $"Upload failed: {ex.Message}"));
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateGuide([FromBody] CreateGuideRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(providerId))
+                return Unauthorized();
+
+            var guide = new Domain.Models.Guide
+            {
+                ProviderId = providerId,
+                FullName = request.FullName ?? string.Empty,
+                PhoneNumber = request.PhoneNumber ?? string.Empty,
+                Email = request.Email ?? string.Empty,
+                Description = request.Description ?? string.Empty,
+                Nationality = request.Nationality ?? string.Empty,
+                Languages = request.Languages ?? string.Empty,
+                Specialization = request.Specialization ?? string.Empty,
+                ImageUrl = request.ImageUrl ?? string.Empty,
+                Bio = request.Bio ?? string.Empty,
+                PricePerDay = request.PricePerDay,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _context.Guides.AddAsync(guide);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetGuideById), new { id = guide.Id }, guide.Id);
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateGuide(Guid id, [FromBody] CreateGuideRequest request)
+        {
+            if (request is null)
+                return BadRequest("Request body is required.");
+
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var guide = await _context.Guides.FirstOrDefaultAsync(g => g.Id == id && g.ProviderId == providerId);
+            if (guide is null)
+                return Unauthorized("Not your guide or not found");
+
+            guide.FullName = request.FullName ?? guide.FullName;
+            guide.PhoneNumber = request.PhoneNumber ?? guide.PhoneNumber;
+            guide.Email = request.Email ?? guide.Email;
+            guide.Description = request.Description ?? guide.Description;
+            guide.Nationality = request.Nationality ?? guide.Nationality;
+            guide.Languages = request.Languages ?? guide.Languages;
+            guide.Specialization = request.Specialization ?? guide.Specialization;
+            guide.ImageUrl = request.ImageUrl ?? guide.ImageUrl;
+            guide.Bio = request.Bio ?? guide.Bio;
+            guide.PricePerDay = request.PricePerDay;
+            guide.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteGuide(Guid id)
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var guide = await _context.Guides.FirstOrDefaultAsync(g => g.Id == id && g.ProviderId == providerId);
+            if (guide is null)
+                return Unauthorized("Not your guide or not found");
+
+            if (!string.IsNullOrEmpty(guide.ImageUrl))
+            {
+                _fileUploadService.DeleteFile(guide.ImageUrl);
+            }
+
+            _context.Guides.Remove(guide);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpGet("my")]
+        [Authorize]
+        public async Task<IActionResult> GetMyGuides()
+        {
+            var providerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var guides = await _context.Guides
+                .AsNoTracking()
+                .Where(g => g.ProviderId == providerId)
+                .OrderByDescending(g => g.CreatedAt)
+                .Select(g => new Application.Dtos.Guides.GuideResponse
+                {
+                    Id = g.Id,
+                    FullName = g.FullName,
+                    PhoneNumber = g.PhoneNumber,
+                    Email = g.Email,
+                    Description = g.Description,
+                    Nationality = g.Nationality,
+                    Languages = g.Languages,
+                    Specialization = g.Specialization,
+                    ImageUrl = g.ImageUrl,
+                    Bio = g.Bio,
+                    PricePerDay = g.PricePerDay,
+                    Rating = g.Rating,
+                    ReviewCount = g.ReviewCount,
+                    IsAvailable = g.IsAvailable
+                })
+                .ToListAsync();
+
+            return Ok(guides);
+        }
     }
 }
