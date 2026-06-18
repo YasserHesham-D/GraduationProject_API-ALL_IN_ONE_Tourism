@@ -32,6 +32,9 @@ builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 builder.Services.AddControllers();
 
+// Add SignalR
+builder.Services.AddSignalR();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -54,10 +57,13 @@ builder.Services.AddSwaggerGen(options =>
                      
                       "- **Providers:** provider1@example.com to provider4@example.com (Password: `Provider@123456`)\n\n" +
                      
-                      "- **Customers:** customer1@example.com to customer4@example.com (Password: `Customer@123456`)"
+                      "- **Customers:** customer1@example.com to customer4@example.com (Password: `Customer@123456`)\n\n" +
+
+                      "- **Guideds:** khaled.guide@tourism.eg , amr.guide@tourism.eg , marian.guide@tourism.eg , joe.guide@tourism.eg  (Password: `Guide@123456`)\n\n"
+
     });
 
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
@@ -127,7 +133,17 @@ app.MapGet("/api/files/{*filePath}", async (string filePath, IWebHostEnvironment
     }
 });
 
+// Map controllers
 app.MapControllers();
+
+// Map SignalR hubs
+app.MapHub<Presentation.Hubs.ChatHub>("/hubs/chat");
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var seedService = scope.ServiceProvider.GetRequiredService<SeedDataService>();
+//    await seedService.InitializeAsync();
+//}
 
 app.Run();
 

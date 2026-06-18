@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -36,7 +37,7 @@ namespace Presentation.ServiceExtensions
                     ValidAudience = jWT.GetSection("Audience").Value,
 
                     ValidateLifetime = true,
-                    
+
                     ClockSkew = TimeSpan.Zero,
 
                     ValidateIssuerSigningKey = true,
@@ -61,6 +62,21 @@ namespace Presentation.ServiceExtensions
                     }
                 };
 
+                Options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            path.StartsWithSegments("/hubs/chat"))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+
+                };
             });
         }
     }

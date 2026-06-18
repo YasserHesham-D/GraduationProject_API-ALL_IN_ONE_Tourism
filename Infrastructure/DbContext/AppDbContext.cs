@@ -1,4 +1,5 @@
 using Domain.Models;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,9 @@ namespace Infrastructure.DbContext
         public DbSet<Transport> Transports => Set<Transport>();
         public DbSet<Program> Programs => Set<Program>();
         public DbSet<Guide> Guides => Set<Guide>();
+
+        // Chat messages
+        public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
 
         // Booking entities
         public DbSet<HotelBooking> HotelBookings => Set<HotelBooking>();
@@ -269,6 +273,16 @@ namespace Infrastructure.DbContext
                 entity.Property(e => e.WithdrawnAmount).HasPrecision(18, 2);
                 entity.HasIndex(e => e.ProviderId).IsUnique();
                 entity.HasOne(e => e.Provider).WithMany().HasForeignKey(e => e.ProviderId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ChatMessage configuration
+            builder.Entity<ChatMessage>(entity =>
+            {
+                entity.Property(c => c.Text).HasMaxLength(2000).IsRequired();
+                entity.Property(c => c.SenderId).HasMaxLength(450).IsRequired();
+                entity.Property(c => c.RecipientId).HasMaxLength(450);
+                entity.Property(c => c.GroupName).HasMaxLength(200);
+                entity.Property(c => c.SentAt).IsRequired();
             });
         }
     }

@@ -51,7 +51,7 @@ namespace Presentation.ServiceExtensions
             services.AddScoped<IProviderEarningsRepo, ProviderEarningsRepo>();
             services.AddScoped<IProviderService, ProviderService>();
 
-            //services.AddScoped<SeedDataService>();
+            services.AddScoped<SeedDataService>();
 
             return services;
         }

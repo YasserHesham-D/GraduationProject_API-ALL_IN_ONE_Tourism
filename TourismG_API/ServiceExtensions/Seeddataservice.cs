@@ -75,6 +75,12 @@ namespace Presentation.ServiceExtensions
                 var provider3 = await CreateUserWithRoleAsync("provider3@example.com", "Provider@123456", "provider3", "Provider", "Egyptian");
                 var provider4 = await CreateUserWithRoleAsync("provider4@example.com", "Provider@123456", "provider4", "Provider", "Egyptian");
 
+                // Seed guide users and assign Guide role
+                var guideA = await CreateUserWithRoleAsync("khaled.guide@tourism.eg", "Guide@123456", "dr.khaled", "Guide", "Egyptian");
+                var guideB = await CreateUserWithRoleAsync("marian.guide@tourism.eg", "Guide@123456", "marian", "Guide", "Egyptian");
+                var guideC = await CreateUserWithRoleAsync("joe.guide@tourism.eg", "Guide@123456", "joe", "Guide", "Egyptian");
+                var guideD = await CreateUserWithRoleAsync("amr.guide@tourism.eg", "Guide@123456", "amr", "Guide", "Egyptian");
+
                 var customer1 = await CreateUserWithRoleAsync("customer1@example.com", "Customer@123456", "customer1", "Customer", "American");
                 var customer2 = await CreateUserWithRoleAsync("customer2@example.com", "Customer@123456", "customer2", "Customer", "British");
                 var customer3 = await CreateUserWithRoleAsync("customer3@example.com", "Customer@123456", "customer3", "Customer", "German");
@@ -85,6 +91,7 @@ namespace Presentation.ServiceExtensions
                 {
                     new()
                     {
+                        
                         Name = "Great Pyramids of Giza",
                         Category = "Historical",
                         LocationName = "Al Haram, Giza Governorate, Egypt",
@@ -691,15 +698,16 @@ namespace Presentation.ServiceExtensions
                 var program3 = programs[2];
                 var program4 = programs[3];
 
-                // Seed Guides (4 rows)
+                // Seed Guides (4 rows) — use Identity user ids for Guide.Id and admin-created (no ProviderId)
                 var guides = new List<Guide>
                 {
                     new()
                     {
-                        ProviderId = provider1.Id,
+                        Id = Guid.Parse(guideA.Id),
+                        ProviderId = null,
                         FullName = "Dr. Khaled Abdel-Moneim",
                         PhoneNumber = "+201001234567",
-                        Email = "khaled.guide@tourism.eg",
+                        Email = guideA.Email,
                         Description = "Professional Egyptologist with a PhD in Ancient History from Cairo University.",
                         Nationality = "Egyptian",
                         Languages = "Arabic, English, German",
@@ -709,14 +717,17 @@ namespace Presentation.ServiceExtensions
                         PricePerDay = 1500m,
                         Rating = 4.95m,
                         ReviewCount = 380,
-                        IsAvailable = true
+                        IsAvailable = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
                     },
                     new()
                     {
-                        ProviderId = provider2.Id,
+                        Id = Guid.Parse(guideB.Id),
+                        ProviderId = null,
                         FullName = "Marian Shenouda",
                         PhoneNumber = "+201229876543",
-                        Email = "marian.guide@tourism.eg",
+                        Email = guideB.Email,
                         Description = "Expert guide specializing in Coptic & Islamic Cairo tours, and traditional local crafts.",
                         Nationality = "Egyptian",
                         Languages = "Arabic, English, French",
@@ -726,14 +737,17 @@ namespace Presentation.ServiceExtensions
                         PricePerDay = 1200m,
                         Rating = 4.88m,
                         ReviewCount = 220,
-                        IsAvailable = true
+                        IsAvailable = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
                     },
                     new()
                     {
-                        ProviderId = provider3.Id,
+                        Id = Guid.Parse(guideC.Id),
+                        ProviderId = null,
                         FullName = "Youssef 'Joe' Bedouin",
                         PhoneNumber = "+201115556667",
-                        Email = "joe.guide@tourism.eg",
+                        Email = guideC.Email,
                         Description = "Experienced desert safari navigator and Sinai wilderness specialist.",
                         Nationality = "Egyptian",
                         Languages = "Arabic, English, Italian",
@@ -743,14 +757,17 @@ namespace Presentation.ServiceExtensions
                         PricePerDay = 1000m,
                         Rating = 4.9m,
                         ReviewCount = 150,
-                        IsAvailable = true
+                        IsAvailable = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
                     },
                     new()
                     {
-                        ProviderId = provider4.Id,
+                        Id = Guid.Parse(guideD.Id),
+                        ProviderId = null,
                         FullName = "Amr El-Gamil",
                         PhoneNumber = "+201064448889",
-                        Email = "amr.guide@tourism.eg",
+                        Email = guideD.Email,
                         Description = "Certified marine biologist and Red Sea diving and snorkeling guide.",
                         Nationality = "Egyptian",
                         Languages = "Arabic, English, Russian",
@@ -760,7 +777,9 @@ namespace Presentation.ServiceExtensions
                         PricePerDay = 1300m,
                         Rating = 4.75m,
                         ReviewCount = 190,
-                        IsAvailable = true
+                        IsAvailable = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
                     }
                 };
 
@@ -1115,7 +1134,7 @@ namespace Presentation.ServiceExtensions
 
         private async Task CreateRolesAsync()
         {
-            var roles = new[] { "Admin", "Customer", "Provider" };
+            var roles = new[] { "Admin", "Customer", "Provider", "Guide" };
 
             foreach (var role in roles)
             {

@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "TourismG API",
-    "description": "API documentation for the TourismG mobile tourism app.\n\n**Seeded Test Credentials:**\n- **Admin:** admin@example.com (Password: `Admin@123456`)\n\n- **Providers:** provider1@example.com to provider4@example.com (Password: `Provider@123456`)\n\n- **Customers:** customer1@example.com to customer4@example.com (Password: `Customer@123456`)",
+    "description": "API documentation for the TourismG mobile tourism app.\n\n**Seeded Test Credentials:**\n- **Admin:** admin@example.com (Password: `Admin@123456`)\n\n- **Providers:** provider1@example.com to provider4@example.com (Password: `Provider@123456`)\n\n- **Customers:** customer1@example.com to customer4@example.com (Password: `Customer@123456`)\n\n- **Guideds:** khaled.guide@tourism.eg , amr.guide@tourism.eg , marian.guide@tourism.eg , joe.guide@tourism.eg  (Password: `Guide@123456`)\n\n",
     "version": "v1"
   },
   "paths": {
@@ -324,6 +324,48 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Chat/history/{userA}/{userB}": {
+      "get": {
+        "tags": [
+          "Chat"
+        ],
+        "parameters": [
+          {
+            "name": "userA",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userB",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Chat/myconversations": {
+      "get": {
+        "tags": [
+          "Chat"
         ],
         "responses": {
           "200": {
@@ -890,18 +932,6 @@
         }
       }
     },
-    "/api/Places/places": {
-      "get": {
-        "tags": [
-          "Places"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Places/places/{id}": {
       "put": {
         "tags": [
@@ -965,6 +995,46 @@
         }
       }
     },
+    "/api/Places/category/{category}": {
+      "get": {
+        "tags": [
+          "Places"
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Places/summary": {
       "get": {
         "tags": [
@@ -978,6 +1048,18 @@
       }
     },
     "/api/Places/GetRecommendedPlaces": {
+      "get": {
+        "tags": [
+          "Places"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Places/categories": {
       "get": {
         "tags": [
           "Places"
@@ -3298,6 +3380,9 @@
     },
     {
       "name": "Bookings"
+    },
+    {
+      "name": "Chat"
     },
     {
       "name": "Guides"

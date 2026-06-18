@@ -215,6 +215,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Presentation.Controllers.ChatController",
+    "Method": "GetChatHistory",
+    "RelativePath": "api/Chat/history/{userA}/{userB}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userA",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userB",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.ChatController",
+    "Method": "GetMyConversations",
+    "RelativePath": "api/Chat/myconversations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_6",
     "RelativePath": "api/files/{*filePath}",
@@ -573,8 +604,8 @@
   },
   {
     "ContainingType": "Presentation.Controllers.PlacesController",
-    "Method": "GetRecommendedPlaces",
-    "RelativePath": "api/Places/GetRecommendedPlaces",
+    "Method": "GetCategories",
+    "RelativePath": "api/Places/categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -583,8 +614,34 @@
   },
   {
     "ContainingType": "Presentation.Controllers.PlacesController",
-    "Method": "GetMyPlaces",
-    "RelativePath": "api/Places/places",
+    "Method": "GetPlacesByCategory",
+    "RelativePath": "api/Places/category/{category}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Presentation.Controllers.PlacesController",
+    "Method": "GetRecommendedPlaces",
+    "RelativePath": "api/Places/GetRecommendedPlaces",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
