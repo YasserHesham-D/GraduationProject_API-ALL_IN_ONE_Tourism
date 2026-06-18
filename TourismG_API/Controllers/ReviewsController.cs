@@ -12,7 +12,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController(AppDbContext context, IFileUploadService fileUploadService) : ControllerBase
+    public class ReviewsController(AppDbContext context, IFileUploadService fileUploadService, IConfiguration configuration) : ControllerBase
     {
         [HttpGet("places/{placeId:guid}")]
         public async Task<IActionResult> GetPlaceReviews(Guid placeId)
@@ -177,6 +177,10 @@ namespace Presentation.Controllers
 
                 var photoUrl = await fileUploadService.UploadFileAsync(request.Photo, "uploads");
 
+                // Build absolute URL for clients
+                var baseUrl = configuration["PublicBaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+                var absoluteUrl = $"{baseUrl}{photoUrl}";
+
                 // Delete old photo if it exists
                 if (!string.IsNullOrEmpty(review.PhotoUrl))
                 {
@@ -186,7 +190,7 @@ namespace Presentation.Controllers
                 review.PhotoUrl = photoUrl;
                 await context.SaveChangesAsync();
 
-                return Ok(new UploadPhotoResponse(true, photoUrl));
+                return Ok(new UploadPhotoResponse(true, absoluteUrl));
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using Presentation.Services;
 using Application.Dtos.Common;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.DbContext;
+using Microsoft.Extensions.Configuration;
 
 namespace Presentation.Controllers
 {
@@ -18,13 +19,15 @@ namespace Presentation.Controllers
         private readonly ILogger<HotelsController> _logger;
         private readonly AppDbContext _context;
         private readonly IFileUploadService _fileUploadService;
+        private readonly IConfiguration _configuration;
 
-        public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger, AppDbContext context, IFileUploadService fileUploadService)
+        public HotelsController(IHotelService hotelService, ILogger<HotelsController> logger, AppDbContext context, IFileUploadService fileUploadService, IConfiguration configuration)
         {
             _hotelService = hotelService;
             _logger = logger;
             _context = context;
             _fileUploadService = fileUploadService;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -113,6 +116,10 @@ namespace Presentation.Controllers
 
                 var photoUrl = await _fileUploadService.UploadFileAsync(request.Photo, "uploads");
 
+                // Build absolute URL
+                var baseUrl = _configuration["PublicBaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+                var absoluteUrl = $"{baseUrl}{photoUrl}";
+
                 if (!string.IsNullOrEmpty(hotel.ImageUrl))
                 {
                     _fileUploadService.DeleteFile(hotel.ImageUrl);
@@ -121,7 +128,7 @@ namespace Presentation.Controllers
                 hotel.ImageUrl = photoUrl;
                 await _context.SaveChangesAsync();
 
-                return Ok(new UploadPhotoResponse(true, photoUrl));
+                return Ok(new UploadPhotoResponse(true, absoluteUrl));
             }
             catch (Exception ex)
             {

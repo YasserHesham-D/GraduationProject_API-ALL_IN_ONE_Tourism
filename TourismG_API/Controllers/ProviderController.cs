@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Presentation.Controllers
 {
@@ -20,12 +21,14 @@ namespace Presentation.Controllers
         private readonly AppDbContext _context;
         private readonly IProviderService _providerService;
         private readonly IFileUploadService _fileUploadService;
+        private readonly IConfiguration _configuration;
 
-        public ProviderController(AppDbContext context, IProviderService providerService, IFileUploadService fileUploadService)
+        public ProviderController(AppDbContext context, IProviderService providerService, IFileUploadService fileUploadService, IConfiguration configuration)
         {
             _context = context;
             _providerService = providerService;
             _fileUploadService = fileUploadService;
+            _configuration = configuration;
         }
         [HttpGet("dashboard")]
         public async Task<IActionResult> GetDashboard()
@@ -240,6 +243,10 @@ namespace Presentation.Controllers
 
                 var photoUrl = await _fileUploadService.UploadFileAsync(request.Photo, "uploads");
 
+                // Build absolute URL for clients
+                var baseUrl = _configuration["PublicBaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+                var absoluteUrl = $"{baseUrl}{photoUrl}";
+
                 // Delete old image if it exists
                 if (!string.IsNullOrEmpty(service.ImageUrl))
                 {
@@ -250,7 +257,7 @@ namespace Presentation.Controllers
                 service.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
 
-                return Ok(new UploadPhotoResponse(true, photoUrl));
+                return Ok(new UploadPhotoResponse(true, absoluteUrl));
             }
             catch (Exception ex)
             {

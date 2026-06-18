@@ -14,7 +14,7 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ProfileController(UserManager<User> userManager, AppDbContext context, IFileUploadService fileUploadService) : ControllerBase
+    public class ProfileController(UserManager<User> userManager, AppDbContext context, IFileUploadService fileUploadService, IConfiguration configuration) : ControllerBase
     {
         [HttpGet("me")]
         public async Task<IActionResult> GetMe()
@@ -88,6 +88,10 @@ namespace Presentation.Controllers
 
                 var photoUrl = await fileUploadService.UploadFileAsync(request.Photo, "uploads");
 
+                // Build absolute URL for clients
+                var baseUrl = configuration["PublicBaseUrl"] ?? $"{Request.Scheme}://{Request.Host}";
+                var absoluteUrl = $"{baseUrl}{photoUrl}";
+
                 // Delete old avatar if it exists
                 if (!string.IsNullOrEmpty(user.ProfileImageUrl))
                 {
@@ -102,7 +106,7 @@ namespace Presentation.Controllers
                     return BadRequest(result.Errors.Select(e => e.Description));
                 }
 
-                return Ok(new UploadPhotoResponse(true, photoUrl));
+                return Ok(new UploadPhotoResponse(true, absoluteUrl));
             }
             catch (Exception ex)
             {

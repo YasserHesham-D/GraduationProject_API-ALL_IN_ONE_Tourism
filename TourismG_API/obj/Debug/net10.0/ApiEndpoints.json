@@ -257,7 +257,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Guides.CreateGuideRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -294,7 +294,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Guides.CreateGuideRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -388,7 +388,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Hotels.CreateHotelRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -425,7 +425,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Hotels.CreateHotelRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -701,7 +701,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Programs.CreateProgramRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -738,7 +738,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Programs.CreateProgramRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -1283,7 +1283,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Transport.CreateTransportRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -1320,7 +1320,7 @@
       {
         "Name": "request",
         "Type": "Application.Dtos.Transport.CreateTransportRequest",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

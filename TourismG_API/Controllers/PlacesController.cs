@@ -54,22 +54,18 @@ namespace Presentation.Controllers
                 .ThenByDescending(p => p.Rating)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(p => new PlaceListItem(
+                .Select(p => new PlaceListItemR(
                     p.Id,
                     p.Name,
-                    p.Category,
-                    p.LocationName,
                     p.City,
                     p.Country,
                     p.ImageUrl,
                     p.Rating,
-                    p.ReviewCount,
-                    p.PriceFrom,
                     p.IsRecommended,
                     p.IsPopular))
                 .ToListAsync();
 
-            return Ok(new PagedResponse<PlaceListItem>(items, page, pageSize, totalCount));
+            return Ok(new PagedResponse<PlaceListItemR>(items, page, pageSize, totalCount));
         }
 
         [HttpGet("{id:guid}")]
@@ -178,35 +174,36 @@ namespace Presentation.Controllers
 
 
         // Place Management Endpoints
-        [HttpGet("places")]
-        public async Task<IActionResult> GetMyPlaces()
-        {
-            var providerId = GetUserId();
-            var places = await context.Places
-                .AsNoTracking()
-                .OrderByDescending(p => p.CreatedAt)
-                .Select(p => new ProviderPlaceItem(
-                    p.Id,
-                    p.Name,
-                    p.Category,
-                    p.City,
-                    p.Country,
-                    p.LocationName,
-                    p.Description,
-                    p.ImageUrl,
-                    p.OpeningHours,
-                    p.Rating,
-                    p.ReviewCount,
-                    p.PriceFrom,
-                    p.DistanceKm,
-                    p.Latitude,
-                    p.Longitude,
-                    p.IsRecommended,
-                    p.IsPopular))
-                .ToListAsync();
+        //[HttpGet("places")]
+        //public async Task<IActionResult> GetMyPlaces()
+        //{
+        //    var providerId = GetUserId();
+        //    var places = await context.Places
+        //        .AsNoTracking()
+        //        .OrderByDescending(p => p.CreatedAt)
+        //        .Select(p => new ProviderPlaceItem(
+        //            p.Id,
+        //            p.Name,
+        //            p.Category,
+        //            p.City,
+        //            p.Country,
+        //            p.LocationName,
+        //            p.Description,
+        //            p.ImageUrl,
+        //            p.OpeningHours,
+        //            p.Rating,
+        //            p.ReviewCount,
+        //            p.PriceFrom,
+        //            p.DistanceKm,
+        //            p.Latitude,
+        //            p.Longitude,
+        //            p.IsRecommended,
+        //            p.IsPopular))
+        //        .ToListAsync();
 
-            return Ok(places);
-        }
+        //    return Ok(places);
+        //}
+
         [HttpPut("places/{id:guid}")]
         public async Task<IActionResult> UpdatePlace(Guid id, [FromBody] CreatePlaceRequest request)
         {
@@ -251,11 +248,11 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-        //[HttpGet("category/{category}")]
-        //public async Task<IActionResult> GetPlacesByCategory(string category, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
-        //{
-        //    return await GetPlaces(null, category, null, null, page, pageSize);
-        //}
+        [HttpGet("category/{category}")]
+        public async Task<IActionResult> GetPlacesByCategory(string category, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        {
+            return await GetPlaces(null, category, null, null, page, pageSize);
+        }
 
         [HttpGet("summary")]
         public async Task<IActionResult> GetPlaceSummaries()
@@ -268,8 +265,8 @@ namespace Presentation.Controllers
                     p.Name,
                     p.LocationName,
                     p.ImageUrl,
-                    p.Rating,
-                    p.PriceFrom))
+                    p.Rating
+                    ))
                 .ToListAsync();
 
             return Ok(places);
@@ -278,23 +275,18 @@ namespace Presentation.Controllers
         [HttpGet("[Action]")]
         public async Task<IActionResult> GetRecommendedPlaces()
         {
-            
 
             var Recomended = await context.Places
                 .AsNoTracking()
                 .Where(p => p.IsRecommended).Where(x => x.IsPopular).OrderBy(x => x.Rating)
                 .Take(5)
-                .Select(p => new PlaceListItem(
+                .Select(p => new PlaceListItemR(
                     p.Id,
                     p.Name,
-                    p.Category,
-                    p.LocationName,
                     p.City,
                     p.Country,
                     p.ImageUrl,
                     p.Rating,
-                    p.ReviewCount,
-                    p.PriceFrom,
                     p.IsRecommended,
                     p.IsPopular))
                 .ToListAsync();
@@ -302,18 +294,18 @@ namespace Presentation.Controllers
             return Ok(Recomended);
         }
 
-        //[HttpGet("categories")]
-        //public async Task<IActionResult> GetCategories()
-        //{
-        //    var categories = await context.Places
-        //        .AsNoTracking()
-        //        .Select(p => p.Category)
-        //        .Distinct()
-        //        .OrderBy(c => c)
-        //        .ToListAsync();
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories()
+        {
+            var categories = await context.Places
+                .AsNoTracking()
+                .Select(p => p.Category)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToListAsync();
 
-        //    return Ok(new[] { "All" }.Concat(categories));
-        //}
+            return Ok(new[] { "All" }.Concat(categories));
+        }
         private string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException("Missing user id claim.");
@@ -321,7 +313,15 @@ namespace Presentation.Controllers
     }
 
     public record PagedResponse<T>(IReadOnlyCollection<T> Items, int Page, int PageSize, int TotalCount);
-
+    public record PlaceListItemR(
+    Guid Id,
+    string Name,
+    string City,
+    string Country,
+    string ImageUrl,
+    decimal Rating,
+    bool IsRecommended,
+    bool IsPopular);
     public record PlaceListItem(
         Guid Id,
         string Name,
@@ -356,7 +356,7 @@ namespace Presentation.Controllers
         IReadOnlyCollection<NearbyPlaceDto> NearbyPlaces,
         IReadOnlyCollection<ReviewDto> Reviews);
 
-    public record PlaceSummary(Guid Id, string Name, string LocationName, string ImageUrl, decimal Rating, decimal? PriceFrom);
+    public record PlaceSummary(Guid Id, string Name, string LocationName, string ImageUrl, decimal Rating);
     public record NearbyPlaceDto(Guid Id, string Name, decimal Rating, string LocationName, string ImageUrl);
     public record ReviewDto(Guid Id, int Rating, string Comment, string Username, DateTime CreatedAt);
     public record CreatePlaceRequest(string Name, string? Category, string LocationName, string City, string? Country, string? Description, string? ImageUrl, string? OpeningHours, decimal? Rating, decimal? PriceFrom, decimal? DistanceKm, decimal? Latitude, decimal? Longitude, bool? IsRecommended, bool? IsPopular);
