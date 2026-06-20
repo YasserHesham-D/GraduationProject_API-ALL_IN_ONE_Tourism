@@ -196,7 +196,7 @@ namespace Presentation.Controllers
             transport.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok("Transport updated successfully.");
         }
 
         [HttpDelete("{id:guid}")]
@@ -215,7 +215,7 @@ namespace Presentation.Controllers
 
             _context.Transports.Remove(transport);
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok("Transport deleted successfully.");
         }
 
         [HttpGet("my")]

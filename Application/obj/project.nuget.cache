@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TZoJeLc0IDg=",
+  "dgSpecHash": "hwRd927TK+M=",
   "success": true,
-  "projectFilePath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\Application\\Application.csproj",
+  "projectFilePath": "D:\\WebDev\\Backend\\Api's\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yasser hesham\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\yasser hesham\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

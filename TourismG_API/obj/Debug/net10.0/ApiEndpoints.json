@@ -246,6 +246,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Presentation.Controllers.ChatBotController",
+    "Method": "Chat",
+    "RelativePath": "api/ChatBot",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Presentation.Controllers.ChatRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_6",
     "RelativePath": "api/files/{*filePath}",
@@ -870,22 +886,6 @@
   },
   {
     "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "AddService",
-    "RelativePath": "api/provider/Addservices",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Presentation.Controllers.UpsertServiceRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
     "Method": "GetBookings",
     "RelativePath": "api/provider/bookings",
     "HttpMethod": "GET",
@@ -1052,90 +1052,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "GetMyServices",
-    "RelativePath": "api/provider/services",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "GetMyService",
-    "RelativePath": "api/provider/services/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "UpdateService",
-    "RelativePath": "api/provider/services/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "Presentation.Controllers.UpsertServiceRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "DeleteService",
-    "RelativePath": "api/provider/services/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ProviderController",
-    "Method": "UploadServicePhoto",
-    "RelativePath": "api/provider/services/{id}/upload-photo",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "Photo",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Presentation.Controllers.ReviewsController",
     "Method": "UploadReviewPhoto",
     "RelativePath": "api/Reviews/{reviewId}/upload-photo",
@@ -1247,74 +1163,6 @@
         "Name": "take",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ServicesController",
-    "Method": "GetServices",
-    "RelativePath": "api/Services",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "category",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "search",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ServicesController",
-    "Method": "GetService",
-    "RelativePath": "api/Services/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Presentation.Controllers.ServicesController",
-    "Method": "BookService",
-    "RelativePath": "api/Services/{id}/book",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "Presentation.Controllers.CreateBookingRequest",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

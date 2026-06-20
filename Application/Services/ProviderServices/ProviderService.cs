@@ -95,7 +95,7 @@ namespace Application.Services
             var user = await _userManager.FindByIdAsync(request.UserId);
             if (user != null)
             {
-                
+                await _userManager.RemoveFromRoleAsync(user, "Customer");
                 var result = await _userManager.AddToRoleAsync(user, "Provider");
                 if (!result.Succeeded)
                 {

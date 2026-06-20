@@ -10,6 +10,7 @@ namespace Presentation.Controllers
     [ApiController]
     public class PlacesController(AppDbContext context) : ControllerBase
     {
+
         [HttpGet]
         public async Task<IActionResult> GetPlaces(
             [FromQuery] string? search,
@@ -172,7 +173,6 @@ namespace Presentation.Controllers
             return Ok(new{message = "Place added successfully" });
         }
 
-
         // Place Management Endpoints
         //[HttpGet("places")]
         //public async Task<IActionResult> GetMyPlaces()
@@ -306,10 +306,12 @@ namespace Presentation.Controllers
 
             return Ok(new[] { "All" }.Concat(categories));
         }
+
         private string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new InvalidOperationException("Missing user id claim.");
         }
+
     }
 
     public record PagedResponse<T>(IReadOnlyCollection<T> Items, int Page, int PageSize, int TotalCount);
