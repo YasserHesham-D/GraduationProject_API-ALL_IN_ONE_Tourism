@@ -37,11 +37,19 @@ builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    //options.AddPolicy("AllowAll", policy =>
+    //{
+    //    policy.AllowAnyOrigin()
+    //          .AllowAnyHeader()
+    //          .AllowAnyMethod();
+    //});
+
+    options.AddPolicy("AllowSpecific", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins(/*"http://127.0.0.1:5500",*/"http://localhost:5500", "https://your-production-domain.com") // <-- specify allowed origins
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials(); // <-- illegal combo with AllowAnyOrigin
     });
 });
 
@@ -92,7 +100,7 @@ var app = builder.Build();
 app.UseStaticFiles();
 
 // CORS Middleware
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecific");
 
 app.UseHttpsRedirection();
 

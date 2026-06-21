@@ -169,7 +169,7 @@ namespace Presentation.Controllers
             await _context.Programs.AddAsync(program);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProgramById), new { id = program.Id }, program.Id);
+            return Ok("Program Added success");
         }
 
         [HttpPut("{id:guid}")]
