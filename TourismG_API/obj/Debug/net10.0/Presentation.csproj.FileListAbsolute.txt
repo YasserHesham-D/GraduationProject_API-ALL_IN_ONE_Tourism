@@ -505,10 +505,10 @@ D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_AP
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.development.json
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\swae.build.ex.cache
-D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presenta.BC777DBE.Up2Date
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.dll
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\refint\Presentation.dll
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.pdb
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\Presentation.genruntimeconfig.cache
 D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\ref\Presentation.dll
+D:\WebDev\Backend\Api's\TourismG_API\GradProject_API\GradProject_API\TourismG_API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

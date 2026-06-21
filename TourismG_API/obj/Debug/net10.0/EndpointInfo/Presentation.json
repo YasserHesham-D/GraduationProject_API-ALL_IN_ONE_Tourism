@@ -353,6 +353,13 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "conversationKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

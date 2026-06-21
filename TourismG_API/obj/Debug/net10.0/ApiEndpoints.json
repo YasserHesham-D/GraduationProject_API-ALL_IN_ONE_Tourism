@@ -231,6 +231,11 @@
         "Name": "userB",
         "Type": "System.String",
         "IsRequired": true
+      },
+      {
+        "Name": "conversationKey",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

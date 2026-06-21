@@ -281,7 +281,7 @@ namespace Infrastructure.DbContext
                 entity.Property(c => c.Text).HasMaxLength(2000).IsRequired();
                 entity.Property(c => c.SenderId).HasMaxLength(450).IsRequired();
                 entity.Property(c => c.RecipientId).HasMaxLength(450);
-                entity.Property(c => c.GroupName).HasMaxLength(200);
+
                 entity.Property(c => c.SentAt).IsRequired();
             });
         }
