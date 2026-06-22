@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models
 {
     public class Guide
@@ -10,6 +12,7 @@ namespace Domain.Models
         public string Nationality { get; set; } = string.Empty;
         public string Languages { get; set; } = string.Empty; // Comma-separated
         public string Specialization { get; set; } = string.Empty; // History, Nature, etc.
+        [MaxLength(2048)]
         public string ImageUrl { get; set; } = string.Empty;
         public string Bio { get; set; } = string.Empty;
         public decimal PricePerDay { get; set; }

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models
 {
     public class Place
@@ -9,14 +11,15 @@ namespace Domain.Models
         public string City { get; set; } = string.Empty;
         public string Country { get; set; } = "Egypt";
         public string Description { get; set; } = string.Empty;
+        [MaxLength(2048)]
         public string ImageUrl { get; set; } = string.Empty;
         public string OpeningHours { get; set; } = string.Empty;
         public decimal Rating { get; set; }
         public int ReviewCount { get; set; }
         public decimal? PriceFrom { get; set; }
         public decimal? DistanceKm { get; set; }
-        public decimal? Latitude { get; set; }
-        public decimal? Longitude { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public bool IsRecommended { get; set; }
         public bool IsPopular { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

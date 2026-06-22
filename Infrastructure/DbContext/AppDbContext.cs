@@ -62,8 +62,8 @@ namespace Infrastructure.DbContext
                 entity.Property(p => p.Rating).HasPrecision(3, 2);
                 entity.Property(p => p.PriceFrom).HasPrecision(18, 2);
                 entity.Property(p => p.DistanceKm).HasPrecision(8, 2);
-                entity.Property(p => p.Latitude).HasPrecision(10, 7);
-                entity.Property(p => p.Longitude).HasPrecision(10, 7);
+                // Latitude and Longitude are stored as double in the model; remove decimal precision mapping
+                // so EF maps them to the appropriate SQL floating-point type.
             });
 
             builder.Entity<ServiceOffering>(entity =>

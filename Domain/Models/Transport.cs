@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models
 {
     public class Transport
@@ -6,6 +8,7 @@ namespace Domain.Models
         public string Name { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty; // Bus, Car, Taxi, etc.
         public string Description { get; set; } = string.Empty;
+        [MaxLength(2048)]
         public string ImageUrl { get; set; } = string.Empty;
         public string DepartureLocation { get; set; } = string.Empty;
         public string ArrivalLocation { get; set; } = string.Empty;

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models
 {
     public class Hotel
@@ -8,6 +10,7 @@ namespace Domain.Models
         public string City { get; set; } = string.Empty;
         public string Country { get; set; } = "Egypt";
         public string Description { get; set; } = string.Empty;
+        [MaxLength(2048)]
         public string ImageUrl { get; set; } = string.Empty;
         public int StarRating { get; set; } // 1-5 stars
         public decimal PricePerNight { get; set; }

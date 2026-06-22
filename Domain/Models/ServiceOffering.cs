@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models
 {
     public class ServiceOffering
@@ -15,6 +17,7 @@ namespace Domain.Models
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string LocationName { get; set; } = string.Empty;
+        [MaxLength(2048)]
         public string ImageUrl { get; set; } = string.Empty;
         public decimal Rating { get; set; }
         public int BookingCount { get; set; }

@@ -46,7 +46,7 @@ builder.Services.AddCors(options =>
 
     options.AddPolicy("AllowSpecific", policy =>
     {
-        policy.WithOrigins(/*"http://127.0.0.1:5500",*/"http://localhost:5500", "https://your-production-domain.com") // <-- specify allowed origins
+        policy.WithOrigins("http://localhost:8080","http://localhost:5500", "https://your-production-domain.com") // <-- specify allowed origins
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials(); // <-- illegal combo with AllowAnyOrigin

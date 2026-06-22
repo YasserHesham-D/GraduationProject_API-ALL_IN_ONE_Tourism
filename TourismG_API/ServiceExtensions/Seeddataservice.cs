@@ -119,11 +119,12 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 500,
                         OpeningHours = "06:00 AM - 05:00 PM",
                         DistanceKm = 280.0m,
-                        Latitude = 22.3412m,
-                        Longitude = 31.6256m,
+                        Latitude = 22.3412d,
+                        Longitude = 31.6256d,
                         IsRecommended = true,
                         IsPopular = true
                     },
+                   
                     new()
                     {
                         Name = "Philae Temple",
@@ -138,11 +139,12 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 250,
                         OpeningHours = "07:00 AM - 04:00 PM",
                         DistanceKm = 12.5m,
-                        Latitude = 24.0225m,
-                        Longitude = 32.8859m,
+                        Latitude = 24.0225d,
+                        Longitude = 32.8859d,
                         IsRecommended = true,
                         IsPopular = true
                     },
+                   
                     new()
                     {
                         Name = "Aswan Botanical Garden",
@@ -157,8 +159,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 100,
                         OpeningHours = "08:00 AM - 05:00 PM",
                         DistanceKm = 3.0m,
-                        Latitude = 24.0845m,
-                        Longitude = 32.8954m,
+                        Latitude = 24.0845d,
+                        Longitude = 32.8954d,
                         IsRecommended = true,
                         IsPopular = true
                     },
@@ -176,8 +178,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 150,
                         OpeningHours = "09:00 AM - 09:00 PM",
                         DistanceKm = 5.0m,
-                        Latitude = 24.0612m,
-                        Longitude = 32.8754m,
+                        Latitude = 24.0612d,
+                        Longitude = 32.8754d,
                         IsRecommended = true,
                         IsPopular = true
                     },
@@ -195,8 +197,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 120,
                         OpeningHours = "07:00 AM - 04:00 PM",
                         DistanceKm = 13.0m,
-                        Latitude = 23.9709m,
-                        Longitude = 32.8775m,
+                        Latitude = 23.9709d,
+                        Longitude = 32.8775d,
                         IsRecommended = false,
                         IsPopular = true
                     },
@@ -214,8 +216,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 100,
                         OpeningHours = "07:00 AM - 05:00 PM",
                         DistanceKm = 2.0m,
-                        Latitude = 24.0764m,
-                        Longitude = 32.8838m,
+                        Latitude = 24.0764d,
+                        Longitude = 32.8838d,
                         IsRecommended = false,
                         IsPopular = false
                     },
@@ -233,8 +235,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 100,
                         OpeningHours = "07:00 AM - 04:00 PM",
                         DistanceKm = 4.5m,
-                        Latitude = 24.0916m,
-                        Longitude = 32.8806m,
+                        Latitude = 24.0916d,
+                        Longitude = 32.8806d,
                         IsRecommended = true,
                         IsPopular = false
                     },
@@ -252,8 +254,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 80,
                         OpeningHours = "08:00 AM - 05:00 PM",
                         DistanceKm = 1.5m,
-                        Latitude = 24.0867m,
-                        Longitude = 32.8869m,
+                        Latitude = 24.0867d,
+                        Longitude = 32.8869d,
                         IsRecommended = true,
                         IsPopular = true
                     },
@@ -271,8 +273,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 100,
                         OpeningHours = "08:00 AM - 04:00 PM",
                         DistanceKm = 6.0m,
-                        Latitude = 24.1083m,
-                        Longitude = 32.8761m,
+                        Latitude = 24.1083d,
+                        Longitude = 32.8761d,
                         IsRecommended = false,
                         IsPopular = false
                     },
@@ -290,8 +292,8 @@ namespace Presentation.ServiceExtensions
                         PriceFrom = 150,
                         OpeningHours = "08:00 AM - 06:00 PM",
                         DistanceKm = 9.0m,
-                        Latitude = 24.0258m,
-                        Longitude = 32.8456m,
+                        Latitude = 24.0258d,
+                        Longitude = 32.8456d,
                         IsRecommended = true,
                         IsPopular = false
                     }

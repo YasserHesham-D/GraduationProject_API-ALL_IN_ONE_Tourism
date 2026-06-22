@@ -352,8 +352,8 @@ namespace Presentation.Controllers
         int ReviewCount,
         decimal? PriceFrom,
         decimal? DistanceKm,
-        decimal? Latitude,
-        decimal? Longitude,
+        double? Latitude,
+        double? Longitude,
         IReadOnlyCollection<ServiceSummary> Services,
         IReadOnlyCollection<NearbyPlaceDto> NearbyPlaces,
         IReadOnlyCollection<ReviewDto> Reviews);
@@ -361,7 +361,7 @@ namespace Presentation.Controllers
     public record PlaceSummary(Guid Id, string Name, string LocationName, string ImageUrl, decimal Rating);
     public record NearbyPlaceDto(Guid Id, string Name, decimal Rating, string LocationName, string ImageUrl);
     public record ReviewDto(Guid Id, int Rating, string Comment, string Username, DateTime CreatedAt);
-    public record CreatePlaceRequest(string Name, string? Category, string LocationName, string City, string? Country, string? Description, string? ImageUrl, string? OpeningHours, decimal? Rating, decimal? PriceFrom, decimal? DistanceKm, decimal? Latitude, decimal? Longitude, bool? IsRecommended, bool? IsPopular);
+    public record CreatePlaceRequest(string Name, string? Category, string LocationName, string City, string? Country, string? Description, string? ImageUrl, string? OpeningHours, decimal? Rating, decimal? PriceFrom, decimal? DistanceKm, double? Latitude, double? Longitude, bool? IsRecommended, bool? IsPopular);
 
     public record ServiceSummary(
         Guid Id,
