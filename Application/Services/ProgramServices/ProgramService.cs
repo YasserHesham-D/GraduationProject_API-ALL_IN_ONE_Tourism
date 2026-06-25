@@ -82,7 +82,13 @@ namespace Application.Services
             };
 
             var createdBooking = await _bookingRepo.AddAsync(booking);
+            // Save booking first to ensure it's persisted
             await _bookingRepo.SaveChangesAsync();
+
+            // Update program's available spots
+            program.AvailableSpots -= request.NumberOfParticipants;
+            await _programRepo.UpdateAsync(program);
+            await _programRepo.SaveChangesAsync();
 
             return MapBookingToResponse(createdBooking, program.Name);
         }

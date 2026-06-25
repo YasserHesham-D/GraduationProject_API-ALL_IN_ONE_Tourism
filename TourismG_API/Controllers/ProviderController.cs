@@ -93,6 +93,7 @@ namespace Presentation.Controllers
                 .Include(b => b.ServiceOffering)
                 .FirstOrDefaultAsync(b => b.Id == id && b.ServiceOffering!.ProviderId == providerId);
 
+
             if (booking is null)
             {
                 return Unauthorized("Its NOt your Service To update it ");

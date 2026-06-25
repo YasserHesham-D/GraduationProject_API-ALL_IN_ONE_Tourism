@@ -80,7 +80,13 @@ namespace Application.Services
             };
 
             var createdBooking = await _bookingRepo.AddAsync(booking);
+            // Save booking first to ensure it's persisted
             await _bookingRepo.SaveChangesAsync();
+
+            // Now update transport's available seats
+            transport.AvailableSeats -= request.NumberOfSeats;
+            await _transportRepo.UpdateAsync(transport);
+            await _transportRepo.SaveChangesAsync();
 
             return MapBookingToResponse(createdBooking, transport.Name);
         }

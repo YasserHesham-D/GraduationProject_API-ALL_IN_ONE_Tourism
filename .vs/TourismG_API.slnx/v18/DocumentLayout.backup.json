@@ -3,24 +3,44 @@
   "WorkspaceRootPath": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\serviceextensions\\seeddataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\serviceextensions\\seeddataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\hubs\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E528BBC3-1C26-8C35-F682-23718816ADCD}|Domain\\Domain.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\domain\\models\\place.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E528BBC3-1C26-8C35-F682-23718816ADCD}|Domain\\Domain.csproj|solutionrelative:domain\\models\\place.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\controllers\\guidescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\guidescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\tourismg_api\\controllers\\placescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F1226F77-498E-559F-A9F6-191E0C276535}|TourismG_API\\Presentation.csproj|solutionrelative:tourismg_api\\controllers\\placescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\application\\services\\transportservices\\transportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|solutionrelative:application\\services\\transportservices\\transportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}|Infrastructure\\Infrastructure.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\infrastructure\\dbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dbcontext\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\application\\services\\hotelservices\\hotelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|solutionrelative:application\\services\\hotelservices\\hotelservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\application\\services\\programservices\\programservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|solutionrelative:application\\services\\programservices\\programservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|d:\\webdev\\backend\\api\u0027s\\tourismg_api\\gradproject_api\\gradproject_api\\application\\services\\guideservices\\guideservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}|Application\\Application.csproj|solutionrelative:application\\services\\guideservices\\guideservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\Presentation.Tests.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\Presentation.Tests\\Presentation.Tests.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatControllerTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\Presentation.Tests\\ChatControllerTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatHubTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\Presentation.Tests\\ChatHubTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 187,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,65 +66,127 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Program.cs",
-              "RelativeDocumentMoniker": "TourismG_API\\Program.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Program.cs",
-              "RelativeToolTip": "TourismG_API\\Program.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAAiAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "ChatHubTests.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatHubTests.cs",
+              "RelativeDocumentMoniker": "tests\\Presentation.Tests\\ChatHubTests.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatHubTests.cs",
+              "RelativeToolTip": "tests\\Presentation.Tests\\ChatHubTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T15:45:01.576Z",
+              "WhenOpened": "2026-06-23T05:50:02.987Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Seeddataservice.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\ServiceExtensions\\Seeddataservice.cs",
-              "RelativeDocumentMoniker": "TourismG_API\\ServiceExtensions\\Seeddataservice.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\ServiceExtensions\\Seeddataservice.cs",
-              "RelativeToolTip": "TourismG_API\\ServiceExtensions\\Seeddataservice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA6AAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "ChatControllerTests.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatControllerTests.cs",
+              "RelativeDocumentMoniker": "tests\\Presentation.Tests\\ChatControllerTests.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\ChatControllerTests.cs",
+              "RelativeToolTip": "tests\\Presentation.Tests\\ChatControllerTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T15:07:42.143Z",
+              "WhenOpened": "2026-06-23T05:49:43.582Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Infrastructure\\DbContext\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\DbContext\\AppDbContext.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Infrastructure\\DbContext\\AppDbContext.cs",
-              "RelativeToolTip": "Infrastructure\\DbContext\\AppDbContext.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T15:07:21.42Z"
+              "DocumentIndex": 7,
+              "Title": "Presentation.Tests.csproj",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\Presentation.Tests.csproj",
+              "RelativeDocumentMoniker": "tests\\Presentation.Tests\\Presentation.Tests.csproj",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\tests\\Presentation.Tests\\Presentation.Tests.csproj",
+              "RelativeToolTip": "tests\\Presentation.Tests\\Presentation.Tests.csproj",
+              "ViewState": "AgIAAAwAAAAAAAAAAABBwBEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-23T05:49:32.917Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Place.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Domain\\Models\\Place.cs",
-              "RelativeDocumentMoniker": "Domain\\Models\\Place.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Domain\\Models\\Place.cs",
-              "RelativeToolTip": "Domain\\Models\\Place.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA7wBgAAABCAAAAAAAAAA==",
+              "Title": "GuidesController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\GuidesController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\GuidesController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\GuidesController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\GuidesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T14:59:51.912Z"
+              "WhenOpened": "2026-06-23T00:23:45.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GuideService.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\GuideServices\\GuideService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\GuideServices\\GuideService.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\GuideServices\\GuideService.cs",
+              "RelativeToolTip": "Application\\Services\\GuideServices\\GuideService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T00:23:25.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProgramService.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\ProgramServices\\ProgramService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\ProgramServices\\ProgramService.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\ProgramServices\\ProgramService.cs",
+              "RelativeToolTip": "Application\\Services\\ProgramServices\\ProgramService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T00:23:25.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HotelService.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\HotelServices\\HotelService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\HotelServices\\HotelService.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\HotelServices\\HotelService.cs",
+              "RelativeToolTip": "Application\\Services\\HotelServices\\HotelService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-23T00:23:25.159Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PlacesController.cs",
-              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\PlacesController.cs",
-              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\PlacesController.cs",
-              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\PlacesController.cs",
-              "RelativeToolTip": "TourismG_API\\Controllers\\PlacesController.cs",
-              "ViewState": "AgIAAFQBAAAAAAAAAAAkwGEBAAAcAAAAAAAAAA==",
+              "Title": "TransportService.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\TransportServices\\TransportService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\TransportServices\\TransportService.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\Application\\Services\\TransportServices\\TransportService.cs",
+              "RelativeToolTip": "Application\\Services\\TransportServices\\TransportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-22T14:56:37.569Z"
+              "WhenOpened": "2026-06-23T00:23:25.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Hubs\\ChatHub.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Hubs\\ChatHub.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Hubs\\ChatHub.cs",
+              "RelativeToolTip": "TourismG_API\\Hubs\\ChatHub.cs",
+              "ViewState": "AgIAAHEAAAAAAAAAAAAQwIEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-22T23:33:32.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "TourismG_API\\Controllers\\ChatController.cs",
+              "ToolTip": "D:\\WebDev\\Backend\\Api\u0027s\\TourismG_API\\GradProject_API\\GradProject_API\\TourismG_API\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "TourismG_API\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-22T23:31:35.753Z",
+              "EditorCaption": ""
             }
           ]
         },

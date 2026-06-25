@@ -84,7 +84,11 @@ namespace Application.Services
             };
 
             var createdBooking = await _bookingRepo.AddAsync(booking);
+            // Save booking first to ensure it's persisted
             await _bookingRepo.SaveChangesAsync();
+
+            // Update guide's tracking (no availability changes needed here as guide has IsAvailable flag)
+            await _guideRepo.SaveChangesAsync();
 
             return MapBookingToResponse(createdBooking, guide.FullName);
         }

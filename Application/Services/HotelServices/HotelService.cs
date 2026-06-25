@@ -63,6 +63,9 @@ namespace Application.Services
             if (hotel == null)
                 throw new Exception("Hotel not found");
 
+            if (hotel.AvailableRooms < request.NumberOfRooms)
+                throw new Exception("Not enough available rooms");
+
             var nights = (request.CheckOutDate - request.CheckInDate).Days;
             var totalPrice = hotel.PricePerNight * request.NumberOfRooms * nights;
 
@@ -82,7 +85,13 @@ namespace Application.Services
             };
 
             var createdBooking = await _bookingRepo.AddAsync(booking);
+            // Save booking first to ensure it's persisted
             await _bookingRepo.SaveChangesAsync();
+
+            // Update hotel's available rooms
+            hotel.AvailableRooms -= request.NumberOfRooms;
+            await _hotelRepo.UpdateAsync(hotel);
+            await _hotelRepo.SaveChangesAsync();
 
             return MapBookingToResponse(createdBooking, hotel.Name);
         }
