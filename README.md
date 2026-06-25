@@ -47,19 +47,19 @@ If you have a UI folder in the repository, place frontend files there. To make t
 
 Login screen
 
-![Login screen](UI/Login DarkMode.png)
+![Login screen](UI/LoginDarkMode.png)
 
 Home / Browse services
 
-![Home screen](UI/Home DarkMode.png)
+![Home screen](UI/HomeDarkMode.png)
 
 Booking flow
 
-![Booking screen](UI/Profile_ServiceProvider_Booking_Confirmed DarkMode.png)
+![Booking screen](UI/Profile_ServiceProvider_Booking_ConfirmedDarkMode.png)
 
 Provider dashboard
 
-![Provider dashboard](UI/Profile_ServiceProvider DarkMode.png)
+![Provider dashboard](UI/Profile_ServiceProviderDarkMode.png)
 
 (If the images are not present, add PNG/JPG files to UI/screens with the names above.)
 
